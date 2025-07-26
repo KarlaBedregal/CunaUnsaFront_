@@ -118,4 +118,15 @@ export default {
   color: #FFFFFF !important;
   font-weight: bold;
 }
+.dropdown-menu {
+  border-radius: 10px;
+  padding: 0.5rem;
+  min-width: 200px;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 </style>
