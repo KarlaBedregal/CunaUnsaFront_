@@ -3,13 +3,13 @@ module.exports = {
   publicPath: '/',
   outputDir: 'dist',
   assetsDir: 'assets',
-  
+
   devServer: {
     proxy: {
       '/api': {
-        target: 'https://cuna-api-unsa-nine.vercel.app',
+        target: 'https://cuna-unsa-production.up.railway.app',
         changeOrigin: true,
-        secure: true
+        secure: true,
       }
     }
   }

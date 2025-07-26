@@ -16,7 +16,7 @@ export default {
     mostrarNavbar() {
       // Lista de rutas donde SÍ quieres mostrar la barra
       const rutasConBarra = [
-        '/dashboard',
+        
         '/profile',
         '/grades',
         '/calendar',
