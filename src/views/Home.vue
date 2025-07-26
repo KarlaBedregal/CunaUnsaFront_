@@ -129,7 +129,8 @@
 </template>
 
 <script>
-import api from '@/services/api'
+// eslint-disable-next-line no-unused-vars
+import api from '@/api'
 
 export default {
   name: 'HomeView',
