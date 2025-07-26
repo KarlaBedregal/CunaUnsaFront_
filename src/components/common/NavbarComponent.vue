@@ -1,6 +1,6 @@
 <!-- filepath: /home/karla/KARLITA/Cuna API unsa/cuna-frontend/src/components/common/NavbarComponent.vue -->
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg custom-navbar">
     <div class="container">
       <router-link class="navbar-brand" to="/">
         🎓 CUNA UNSA
@@ -18,10 +18,16 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <router-link class="nav-link" to="/dashboard">Dashboard</router-link>
+            <router-link class="nav-link" to="/dashboard">Página Principal</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/students">Estudiantes</router-link>
+            <router-link class="nav-link" to="/personal">Área Personal</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/announcements">Anuncios</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/courses">Curso</router-link>
           </li>
         </ul>
         
@@ -36,9 +42,28 @@
             >
               👤 {{ currentUser?.username }}
             </a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu dropdown-menu-end">
               <li>
-                <a class="dropdown-item" href="#" @click="handleLogout">
+                <router-link class="dropdown-item" to="/profile">👤 Perfil</router-link>
+              </li>
+              <li>
+                <router-link class="dropdown-item" to="/grades">📊 Calificaciones</router-link>
+              </li>
+              <li>
+                <router-link class="dropdown-item" to="/calendar">📅 Calendario</router-link>
+              </li>
+              <li>
+                <router-link class="dropdown-item" to="/files">📁 Archivos privados</router-link>
+              </li>
+              <li>
+                <router-link class="dropdown-item" to="/reports">📋 Informes</router-link>
+              </li>
+              <li>
+                <router-link class="dropdown-item" to="/preferences">⚙️ Preferencias</router-link>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <a class="dropdown-item text-danger" href="#" @click="handleLogout">
                   🚪 Cerrar Sesión
                 </a>
               </li>
@@ -73,3 +98,24 @@ export default {
   }
 }
 </script>
+<style scoped>
+.custom-navbar {
+  background-color: #8B1538 !important;
+  color: #FFFFFF;
+}
+
+.custom-navbar .nav-link {
+  color: #FFFFFF !important;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.custom-navbar .nav-link:hover {
+  color: #FFD700 !important; /* dorado al pasar el mouse */
+}
+
+.custom-navbar .navbar-brand {
+  color: #FFFFFF !important;
+  font-weight: bold;
+}
+</style>
