@@ -23,11 +23,7 @@ const routes = [
     path: '/dashboard',
     name: 'Dashboard',
     component: () => import('@/views/Dashboard.vue'),
-<<<<<<< HEAD
-    //meta: { requiresAuth: true }
-=======
     meta: { requiresAuth: true }
->>>>>>> 4c6d7b9049f628739b7e6cd9df1a25040c8c896e
   },
   { path: '/students', name: 'Students', component: () => import('@/views/Students.vue'), meta: { requiresAuth: true } },
   { path: '/teachers', name: 'Teachers', component: () => import('@/views/Teachers.vue'), meta: { requiresAuth: true } },
@@ -80,6 +76,7 @@ const router = createRouter({
 // ⛔️ Guards de navegación
 router.beforeEach((to, from, next) => {
   const isAuthenticated = store.getters.isAuthenticated
+  console.log('Guard: isAuthenticated =', isAuthenticated)
 
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!isAuthenticated) {

@@ -4,7 +4,20 @@ import axios from 'axios';
 const API_BASE_URL = process.env.VUE_APP_API_URL;
 console.log("🌐 API conectando a:", API_BASE_URL);
 
-
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
 // ✅ Crear instancia de Axios
 const apiInstance = axios.create({
   baseURL: API_BASE_URL,
@@ -12,14 +25,20 @@ const apiInstance = axios.create({
     'Content-Type': 'application/json',
   },
   timeout: 10000,
+  withCredentials: true,
 });
 
 // ✅ Interceptor: agregar token automáticamente a las peticiones
 apiInstance.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
+<<<<<<< HEAD
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
+=======
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+>>>>>>> 6c5e762b526c61e370bea61f137f19bb050f13f7
     }
     return config;
   },
@@ -38,16 +57,20 @@ apiInstance.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
+apiInstance.get('/api/health/')
+  .then(res => console.log(res.data))
+  .catch(err => console.error(err));
 // ✅ Exportar las funciones de API como objeto agrupado
 const api = {
   // --- Autenticación ---
-  register(userData) {
-    return apiInstance.post('/api/auth/register/', userData);
-  },
-
   login(credentials) {
-    return apiInstance.post('/api/auth/login/', credentials);
+    // Obtener el CSRF token de las cookies
+    const csrfToken = getCookie('csrftoken');
+    return apiInstance.post('/api/auth/login/', credentials, {
+      headers: {
+        'X-CSRFToken': csrfToken
+      }
+    });
   },
 
   logout() {
@@ -57,11 +80,6 @@ const api = {
   getProfile() {
     return apiInstance.get('/api/auth/profile/');
   },
-
-  getAuthStatus() {
-    return apiInstance.get('/api/auth/status/');
-  },
-
   // --- Estudiantes ---
   getStudents() {
     return apiInstance.get('/api/students/');
