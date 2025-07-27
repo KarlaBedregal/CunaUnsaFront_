@@ -13,6 +13,7 @@
 <script>
 import api from '@/services/api'
 export default {
+    name: 'AnnouncementsView',
   data() {
     return { announcements: [] }
   },

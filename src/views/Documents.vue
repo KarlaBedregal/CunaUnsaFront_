@@ -13,6 +13,7 @@
 <script>
 import api from '@/services/api'
 export default {
+    name: 'DocumentsView',
   data() {
     return { documents: [] }
   },
