@@ -70,7 +70,7 @@ export default {
 
         if (data.success && data.tokens) {
           // ✅ Guardar en localStorage
-          localStorage.setItem('access_token', data.tokens.access)
+          localStorage.setItem('token', data.tokens.access) // <--- este nombre debe coincidir
           localStorage.setItem('refresh_token', data.tokens.refresh)
           localStorage.setItem('user_type', data.user_type)
           localStorage.setItem('user_id', data.user_data.id)
