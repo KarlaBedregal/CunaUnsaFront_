@@ -4,13 +4,10 @@
     <div v-if="canCreate" class="mb-3">
       <h5>Nuevo estudiante</h5>
       <form @submit.prevent="createStudent">
+      <!-- ...campos... -->
         <div class="mb-2">
           <label>Nombre completo:</label>
           <input v-model="form.full_name" type="text" class="form-control" required />
-        </div> 
-        <div class="mb-2">
-          <label>DNI:</label>
-          <input v-model="form.dni" type="text" class="form-control" required />
         </div>
         <div class="mb-2">
           <label>Correo:</label>
@@ -18,10 +15,12 @@
         </div>
         <button type="submit" class="btn btn-success">Crear</button>
         <button type="button" @click="resetForm" class="btn btn-secondary ms-2">Cancelar</button>
+        <!-- ...campos... -->
       </form>
     </div>
     <ul>
-      <li v-for="student in students" :key="student.id">
+          <!-- eslint-disable-next-line vue/no-unused-vars -->
+          <li v-for="student in students" :key="student.id">
         <span v-if="editingId !== student.id">
           {{ student.full_name }} - DNI: {{ student.dni }}
           <span v-if="canEdit(student)" class="ms-2">
