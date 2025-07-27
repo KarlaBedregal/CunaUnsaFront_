@@ -6,7 +6,6 @@ export default createStore({
   state: {
     user: JSON.parse(localStorage.getItem('user')) || null,
     token: localStorage.getItem('token') || null,
-    isAuthenticated: !!localStorage.getItem('token'),
     students: [],
     teachers: [],
     courses: [],
@@ -17,11 +16,9 @@ export default createStore({
   mutations: {
     SET_USER(state, user) {
       state.user = user
-      state.isAuthenticated = !!user
     },
     SET_TOKEN(state, token) {
       state.token = token
-      state.isAuthenticated = !!token
     },
     SET_STUDENTS(state, students) {
       state.students = students
@@ -41,7 +38,8 @@ export default createStore({
     LOGOUT(state) {
       state.user = null
       state.token = null
-      state.isAuthenticated = false
+      localStorage.removeItem('token')
+      localStorage.removeItem('user')
     }
   },
 
@@ -170,5 +168,5 @@ export default createStore({
     courses: state => state.courses,
     loading: state => state.loading,
     error: state => state.error
-  }
+  },
 })
