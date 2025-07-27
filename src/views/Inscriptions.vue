@@ -29,7 +29,7 @@
 import axios from 'axios';
 
 export default {
-  name: 'Inscriptions',
+  name: 'InscriptionsView',
   data() {
     return {
       inscriptions: []
