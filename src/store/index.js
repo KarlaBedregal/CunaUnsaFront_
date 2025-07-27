@@ -50,8 +50,15 @@ export default createStore({
       try {
         commit('SET_LOADING', true);
 
+<<<<<<< HEAD
         const response = await api.login(credentials);
         console.log("🔍 Login response:", response);
+=======
+        if (response.data.success) {
+          // CORREGIDO: extraer datos reales
+          const user = response.data.user_data
+          const token = response.data.tokens?.access
+>>>>>>> ff0bb367 (dfwgregee)
 
         const success = response?.data?.success;
         const data = response?.data?.data;
