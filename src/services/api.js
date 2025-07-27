@@ -12,14 +12,15 @@ const apiInstance = axios.create({
     'Content-Type': 'application/json',
   },
   timeout: 10000,
+  withCredentials: true,
 });
 
 // ✅ Interceptor: agregar token automáticamente a las peticiones
 apiInstance.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
-    if (token) {
-      config.headers.Authorization = `Token ${token}`;
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
@@ -38,14 +39,12 @@ apiInstance.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
+apiInstance.get('/api/health/')
+  .then(res => console.log(res.data))
+  .catch(err => console.error(err));
 // ✅ Exportar las funciones de API como objeto agrupado
 const api = {
   // --- Autenticación ---
-  register(userData) {
-    return apiInstance.post('/api/auth/register/', userData);
-  },
-
   login(credentials) {
     return apiInstance.post('/api/auth/login/', credentials);
   },
@@ -57,11 +56,6 @@ const api = {
   getProfile() {
     return apiInstance.get('/api/auth/profile/');
   },
-
-  getAuthStatus() {
-    return apiInstance.get('/api/auth/status/');
-  },
-
   // --- Estudiantes ---
   getStudents() {
     return apiInstance.get('/api/students/');
