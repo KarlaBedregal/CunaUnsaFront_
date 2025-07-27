@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'LoginView',
@@ -59,24 +59,12 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['login']),
     async handleLogin() {
       try {
-        const response = await axios.post(
-          'https://cunaunsa.onrender.com/api/auth/login/',
-          this.form
-        )
-
-        const data = response.data
-
-        if (data.success && data.tokens) {
-          // ✅ Guardar en localStorage
-          localStorage.setItem('token', data.tokens.access) // <--- este nombre debe coincidir
-          localStorage.setItem('refresh_token', data.tokens.refresh)
-          localStorage.setItem('user_type', data.user_type)
-          localStorage.setItem('user_id', data.user_data.id)
-          localStorage.setItem('full_name', data.user_data.full_name)
-
-          // ✅ Redirigir al dashboard o según tipo de usuario
+        const res = await this.login(this.form)
+        // Si el login fue exitoso, redirige al dashboard
+        if (res && res.success) {
           this.$router.push('/dashboard')
         } else {
           this.errorMessage = 'Credenciales inválidas.'
