@@ -1,7 +1,6 @@
 <template>
   <div class="container mt-4">
     <h2>📢 Chats</h2>
-
     <div v-if="chats.length">
       <ul class="list-group">
         <li v-for="chat in chats" :key="chat.id" class="list-group-item">
@@ -16,42 +15,19 @@
 </template>
 
 <script>
-import axios from 'axios';
-
+import api from '@/services/api'
 export default {
   name: 'ChatsView',
   data() {
-    return {
-      chats: []
-    };
+    return { chats: [] }
   },
-  mounted() {
-    this.fetchChats();
-  },
-  methods: {
-    async fetchChats() {
-      try {
-        const token = localStorage.getItem('access');
-        const response = await axios.get('https://cunaunsa.onrender.com/api/chats/', {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-        this.chats = response.data;
-      } catch (error) {
-        console.error('Error al obtener los chats:', error);
-        if (error.response && error.response.status === 401) {
-          alert('Tu sesión ha expirado. Inicia sesión nuevamente.');
-          this.$router.push('/login');
-        }
-      }
+  async mounted() {
+    try {
+      const res = await api.getChats()
+      this.chats = res.data.results || res.data.data || res.data
+    } catch (error) {
+      this.chats = []
     }
   }
-};
-</script>
-
-<style scoped>
-.container {
-  max-width: 700px;
 }
-</style>
+</script>

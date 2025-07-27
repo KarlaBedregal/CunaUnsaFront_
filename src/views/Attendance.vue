@@ -13,39 +13,19 @@
 </template>
 
 <script>
-import axios from 'axios'
-
+import api from '@/services/api'
 export default {
   name: 'AttendanceView',
   data() {
-    return {
-      attendances: []
-    }
+    return { attendances: [] }
   },
-  mounted() {
-    this.fetchAttendance()
-  },
-  methods: {
-    async fetchAttendance() {
-      const token = localStorage.getItem('token') // Token guardado tras login
-      try {
-        const response = await axios.get('https://cunaunsa.onrender.com/api/attendance/', {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        })
-        this.attendances = response.data
-      } catch (error) {
-        console.error('Error al obtener asistencia:', error)
-        alert('No autorizado o error en el servidor.')
-      }
+  async mounted() {
+    try {
+      const res = await api.getAttendance()
+      this.attendances = res.data.results || res.data.data || res.data
+    } catch (error) {
+      this.attendances = []
     }
   }
 }
 </script>
-
-<style scoped>
-.container {
-  max-width: 800px;
-}
-</style>

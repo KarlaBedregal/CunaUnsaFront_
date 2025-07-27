@@ -1,4 +1,3 @@
-<!-- filepath: c:\CUNA-UNSA-\CunaFrontend\src\views\Workloads.vue -->
 <template>
   <div>
     <h2>Cargas Académicas</h2>
@@ -20,7 +19,7 @@ export default {
   async mounted() {
     try {
       const res = await api.getWorkloads()
-      this.workloads = res.data
+      this.workloads = res.data.results || res.data.data || res.data
     } catch (error) {
       this.workloads = []
     }

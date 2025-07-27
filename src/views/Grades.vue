@@ -1,11 +1,9 @@
 <template>
   <div class="container mt-5">
     <h2 class="text-center mb-4">Notas</h2>
-
     <div v-if="grades.length === 0" class="alert alert-info">
       No hay notas registradas.
     </div>
-
     <table v-else class="table table-bordered table-striped">
       <thead class="thead-dark">
         <tr>
@@ -36,8 +34,7 @@
 </template>
 
 <script>
-import axios from 'axios'
-
+import api from '@/services/api'
 export default {
   name: 'GradesView',
   data() {
@@ -52,48 +49,30 @@ export default {
       return this.userType === 'admin' || this.userType === 'teacher'
     }
   },
-  mounted() {
-    this.getGrades()
+  async mounted() {
+    await this.getGrades()
   },
   methods: {
-    getGrades() {
-      axios
-        .get('/api/grades/', {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`
-          }
-        })
-        .then(response => {
-          this.grades = response.data
-        })
-        .catch(error => {
-          console.error('Error al cargar las notas:', error)
-        })
+    async getGrades() {
+      try {
+        const res = await api.getGrades()
+        this.grades = res.data.results || res.data.data || res.data
+      } catch (error) {
+        this.grades = []
+      }
     },
     editGrade(grade) {
       this.editingGrade = { ...grade }
     },
-    saveEdit() {
-      axios
-        .put(`/api/grades/${this.editingGrade.id}/`, this.editingGrade, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`
-          }
-        })
-        .then(() => {
-          this.getGrades()
-          this.editingGrade = null
-        })
-        .catch(error => {
-          console.error('Error al guardar los cambios:', error)
-        })
+    async saveEdit() {
+      try {
+        await api.updateGrade(this.editingGrade.id, this.editingGrade)
+        await this.getGrades()
+        this.editingGrade = null
+      } catch (error) {
+        console.error('Error al guardar los cambios:', error)
+      }
     }
   }
 }
 </script>
-
-<style scoped>
-.container {
-  max-width: 900px;
-}
-</style>

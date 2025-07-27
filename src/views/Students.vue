@@ -1,4 +1,3 @@
-<!-- filepath: c:\CUNA-UNSA-\CunaFrontend\src\views\Students.vue -->
 <template>
   <div>
     <h2>Estudiantes</h2>
@@ -20,7 +19,7 @@ export default {
   async mounted() {
     try {
       const res = await api.getStudents()
-      this.students = res.data
+      this.students = res.data.results || res.data.data || res.data
     } catch (error) {
       this.students = []
     }

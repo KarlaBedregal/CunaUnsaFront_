@@ -1,8 +1,6 @@
 <template>
   <div class="container mt-4">
     <h2 class="text-center mb-4">📆 Lista de Períodos</h2>
-
-    <!-- Si el usuario es admin, mostramos el formulario para crear o editar -->
     <div v-if="userType === 'admin'" class="card mb-4">
       <div class="card-header">{{ editMode ? 'Editar Período' : 'Nuevo Período' }}</div>
       <div class="card-body">
@@ -24,7 +22,6 @@
         </form>
       </div>
     </div>
-
     <div class="card">
       <div class="card-body">
         <table class="table table-striped">
@@ -54,47 +51,33 @@
 </template>
 
 <script>
-import axios from 'axios'
-
+import api from '@/services/api'
 export default {
   name: 'PeriodView',
   data() {
     return {
       periods: [],
-      newPeriod: {
-        name: '',
-        start_date: '',
-        end_date: '',
-      },
+      newPeriod: { name: '', start_date: '', end_date: '' },
       editMode: false,
       selectedId: null,
-      userType: '', // 'admin', 'teacher', 'father'
+      userType: localStorage.getItem('user_type') || ''
     }
   },
   mounted() {
-    this.userType = localStorage.getItem('user_type') || ''
     this.fetchPeriods()
   },
   methods: {
     async fetchPeriods() {
       try {
-        const response = await axios.get('/api/periods/', {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-          },
-        })
-        this.periods = response.data
+        const res = await api.getPeriods()
+        this.periods = res.data.results || res.data.data || res.data
       } catch (error) {
         console.error('Error al obtener períodos:', error)
       }
     },
     async createPeriod() {
       try {
-        await axios.post('/api/periods/', this.newPeriod, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-          },
-        })
+        await api.createPeriod(this.newPeriod)
         this.newPeriod = { name: '', start_date: '', end_date: '' }
         this.fetchPeriods()
       } catch (error) {
@@ -103,11 +86,7 @@ export default {
     },
     async updatePeriod() {
       try {
-        await axios.put(`/api/periods/${this.selectedId}/`, this.newPeriod, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-          },
-        })
+        await api.updatePeriod(this.selectedId, this.newPeriod)
         this.cancelEdit()
         this.fetchPeriods()
       } catch (error) {
@@ -117,11 +96,7 @@ export default {
     async deletePeriod(id) {
       if (!confirm('¿Estás seguro de eliminar este período?')) return
       try {
-        await axios.delete(`/api/periods/${id}/`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-          },
-        })
+        await api.deletePeriod(id)
         this.fetchPeriods()
       } catch (error) {
         console.error('Error al eliminar período:', error)
@@ -136,13 +111,7 @@ export default {
       this.newPeriod = { name: '', start_date: '', end_date: '' }
       this.selectedId = null
       this.editMode = false
-    },
-  },
+    }
+  }
 }
 </script>
-
-<style scoped>
-h2 {
-  font-weight: bold;
-}
-</style>

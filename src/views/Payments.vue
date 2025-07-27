@@ -1,8 +1,6 @@
-<!-- src/views/Payments.vue -->
 <template>
   <div class="container mt-4">
     <h2 class="mb-4">Pagos</h2>
-
     <div v-if="isAdmin">
       <h4>Registrar nuevo pago</h4>
       <form @submit.prevent="createPayment">
@@ -21,9 +19,7 @@
         <button class="btn btn-primary" type="submit">Registrar</button>
       </form>
     </div>
-
     <hr class="my-4" />
-
     <h4>Lista de pagos</h4>
     <table class="table table-striped">
       <thead>
@@ -51,75 +47,52 @@
 </template>
 
 <script>
-import axios from 'axios';
-
+import api from '@/services/api'
 export default {
   name: 'PaymentsView',
   data() {
     return {
       payments: [],
-      newPayment: {
-        student: '',
-        amount: '',
-        date: ''
-      },
+      newPayment: { student: '', amount: '', date: '' },
       userType: localStorage.getItem('user_type') || ''
-    };
+    }
   },
   computed: {
     isAdmin() {
-      return this.userType === 'admin';
+      return this.userType === 'admin'
     }
   },
   methods: {
     async fetchPayments() {
       try {
-        const res = await axios.get('/api/payments/', {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`
-          }
-        });
-        this.payments = res.data;
+        const res = await api.getPayments()
+        this.payments = res.data.results || res.data.data || res.data
       } catch (error) {
-        console.error('Error al obtener pagos:', error);
+        console.error('Error al obtener pagos:', error)
       }
     },
     async createPayment() {
       try {
-        await axios.post('/api/payments/', this.newPayment, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`
-          }
-        });
-        this.newPayment = { student: '', amount: '', date: '' };
-        this.fetchPayments();
+        await api.createPayment(this.newPayment)
+        this.newPayment = { student: '', amount: '', date: '' }
+        this.fetchPayments()
       } catch (error) {
-        console.error('Error al crear pago:', error);
-        alert('No tienes permisos o hubo un error al crear el pago.');
+        console.error('Error al crear pago:', error)
+        alert('No tienes permisos o hubo un error al crear el pago.')
       }
     },
     async deletePayment(id) {
       try {
-        await axios.delete(`/api/payments/${id}/`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`
-          }
-        });
-        this.fetchPayments();
+        await api.deletePayment(id)
+        this.fetchPayments()
       } catch (error) {
-        console.error('Error al eliminar pago:', error);
-        alert('No tienes permisos o hubo un error al eliminar.');
+        console.error('Error al eliminar pago:', error)
+        alert('No tienes permisos o hubo un error al eliminar.')
       }
     }
   },
   mounted() {
-    this.fetchPayments();
+    this.fetchPayments()
   }
-};
-</script>
-
-<style scoped>
-h2 {
-  text-align: center;
 }
-</style>
+</script>

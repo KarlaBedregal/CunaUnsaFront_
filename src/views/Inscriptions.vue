@@ -26,36 +26,25 @@
 </template>
 
 <script>
-import axios from 'axios';
-
+import api from '@/services/api'
 export default {
   name: 'InscriptionsView',
   data() {
-    return {
-      inscriptions: []
-    };
+    return { inscriptions: [] }
   },
-  methods: {
-    async fetchInscriptions() {
-      try {
-        const token = localStorage.getItem('token');
-        const response = await axios.get('https://cunaunsa.onrender.com/api/inscriptions/', {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-        this.inscriptions = response.data;
-      } catch (error) {
-        console.error('Error al cargar inscripciones:', error);
-      }
-    },
-    formatDate(dateStr) {
-      const date = new Date(dateStr);
-      return date.toLocaleDateString();
+  async mounted() {
+    try {
+      const res = await api.getInscriptions()
+      this.inscriptions = res.data.results || res.data.data || res.data
+    } catch (error) {
+      this.inscriptions = []
     }
   },
-  mounted() {
-    this.fetchInscriptions();
+  methods: {
+    formatDate(dateStr) {
+      const date = new Date(dateStr)
+      return date.toLocaleDateString()
+    }
   }
-};
+}
 </script>
