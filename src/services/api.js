@@ -72,11 +72,6 @@ const api = {
   logout() {
     return apiInstance.post('/api/auth/logout/');
   },
-
-  getProfile() {
-    return apiInstance.get('/api/auth/profile/');
-  },
-
   getAttendance() {
     return apiInstance.get('/api/attendance/');
   },
