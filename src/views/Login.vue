@@ -81,12 +81,13 @@ export default {
     ...mapActions(['login']),
     
     async handleLogin() {
-      try {
-        await this.login(this.form)
-        this.$router.push('/dashboard')
-      } catch (error) {
-        console.error('Error en login:', error)
-      }
+    try {
+      const res = await this.login(this.form)
+      console.log('Login OK:', res)
+      console.log('isAuthenticated:', this.$store.getters.isAuthenticated)
+      this.$router.push('/dashboard')
+    } catch (error) {
+      console.error('Error en login:', error)
     }
   }
 }

@@ -32,13 +32,8 @@ const apiInstance = axios.create({
 apiInstance.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
-<<<<<<< HEAD
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-=======
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
->>>>>>> 6c5e762b526c61e370bea61f137f19bb050f13f7
     }
     return config;
   },
