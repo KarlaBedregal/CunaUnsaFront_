@@ -14,6 +14,7 @@
 import api from '@/services/api'
 export default {
   data() {
+    name: 'AttendanceView',
     return { attendance: [] }
   },
   async mounted() {
