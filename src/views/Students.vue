@@ -1,3 +1,4 @@
+<!-- eslint-disable no-unused-vars -->
 <template>
   <div>
     <h2>Estudiantes</h2>
@@ -19,7 +20,6 @@
       </form>
     </div>
     <ul>
-        <!-- eslint-disable-next-line no-unused-vars -->
         <li v-for="student in students" :key="student.id">
         <span v-if="editingId !== student.id">
           {{ student.full_name }} - DNI: {{ student.dni }}
