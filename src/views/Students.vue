@@ -7,7 +7,7 @@
         <div class="mb-2">
           <label>Nombre completo:</label>
           <input v-model="form.full_name" type="text" class="form-control" required />
-        </div>
+        </div> 
         <div class="mb-2">
           <label>DNI:</label>
           <input v-model="form.dni" type="text" class="form-control" required />
