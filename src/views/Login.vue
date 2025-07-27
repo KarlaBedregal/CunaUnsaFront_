@@ -1,4 +1,3 @@
-<!-- filepath: /home/karla/KARLITA/Cuna API unsa/cuna-frontend/src/views/LoginView.vue -->
 <template>
   <div class="login-container">
     <div class="container">
@@ -20,7 +19,6 @@
                     required
                   />
                 </div>
-                
                 <div class="mb-3">
                   <label for="password" class="form-label">Contraseña</label>
                   <input
@@ -31,7 +29,6 @@
                     required
                   />
                 </div>
-                
                 <div class="d-grid">
                   <button
                     type="submit"
@@ -43,11 +40,9 @@
                   </button>
                 </div>
               </form>
-              
               <div v-if="error" class="alert alert-danger mt-3">
                 {{ error }}
               </div>
-              
               <div class="text-center mt-3">
                 <p>¿No tienes cuenta? <router-link to="/register">Regístrate aquí</router-link></p>
               </div>
@@ -72,22 +67,20 @@ export default {
       }
     }
   },
-  
   computed: {
     ...mapGetters(['loading', 'error'])
   },
-  
   methods: {
     ...mapActions(['login']),
-    
     async handleLogin() {
-    try {
-      const res = await this.login(this.form)
-      console.log('Login OK:', res)
-      console.log('isAuthenticated:', this.$store.getters.isAuthenticated)
-      this.$router.push('/dashboard')
-    } catch (error) {
-      console.error('Error en login:', error)
+      try {
+        const res = await this.login(this.form)
+        console.log('Login OK:', res)
+        console.log('isAuthenticated:', this.$store.getters.isAuthenticated)
+        this.$router.push('/dashboard')
+      } catch (error) {
+        console.error('Error en login:', error)
+      }
     }
   }
 }
@@ -100,13 +93,11 @@ export default {
   align-items: center;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
-
 .card {
   border: none;
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
-
 .card-header {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
