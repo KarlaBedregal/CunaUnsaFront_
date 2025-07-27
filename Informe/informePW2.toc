@@ -1,0 +1,60 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Introducción}{3}{}%
+\contentsline {subsection}{\numberline {1.1}Tipo de Sistema}{3}{}%
+\contentsline {subsection}{\numberline {1.2}Justificación}{3}{}%
+\contentsline {subsection}{\numberline {1.3}Objetivo General}{3}{}%
+\contentsline {subsection}{\numberline {1.4}Objetivos Específicos}{3}{}%
+\contentsline {section}{\numberline {2}Arquitectura del Sistema}{4}{}%
+\contentsline {subsection}{\numberline {2.1}Tecnologías Utilizadas}{4}{}%
+\contentsline {subsection}{\numberline {2.2}Estructura del Proyecto Backend}{4}{}%
+\contentsline {subsection}{\numberline {2.3}Estructura del Proyecto Frontend}{5}{}%
+\contentsline {subsection}{\numberline {2.4}Separación Cliente - Servidor (Vue + Django)}{5}{}%
+\contentsline {section}{\numberline {3}Modelado de Datos}{6}{}%
+\contentsline {subsection}{\numberline {3.1}Entidades y relaciones}{6}{}%
+\contentsline {subsubsection}{\numberline {3.1.1}Student}{6}{}%
+\contentsline {subsubsection}{\numberline {3.1.2}Mother}{6}{}%
+\contentsline {subsubsection}{\numberline {3.1.3}Father}{6}{}%
+\contentsline {subsubsection}{\numberline {3.1.4}Teacher}{6}{}%
+\contentsline {subsubsection}{\numberline {3.1.5}Course}{6}{}%
+\contentsline {subsubsection}{\numberline {3.1.6}Period}{6}{}%
+\contentsline {subsubsection}{\numberline {3.1.7}Workload}{6}{}%
+\contentsline {subsubsection}{\numberline {3.1.8}Inscription}{6}{}%
+\contentsline {subsubsection}{\numberline {3.1.9}Grade}{6}{}%
+\contentsline {subsubsection}{\numberline {3.1.10}Attendance}{7}{}%
+\contentsline {subsubsection}{\numberline {3.1.11}Announcement}{7}{}%
+\contentsline {subsubsection}{\numberline {3.1.12}Chat}{7}{}%
+\contentsline {subsubsection}{\numberline {3.1.13}Document}{7}{}%
+\contentsline {subsubsection}{\numberline {3.1.14}Payment}{7}{}%
+\contentsline {subsection}{\numberline {3.2}Diagrama Entidad-Relación}{7}{}%
+\contentsline {subsubsection}{\numberline {3.2.1}Estructura Académica}{7}{}%
+\contentsline {subsubsection}{\numberline {3.2.2}Estudiantes, Apoderados e Inscripciones}{8}{}%
+\contentsline {subsubsection}{\numberline {3.2.3}Seguimiento Académico y Recursos}{8}{}%
+\contentsline {subsection}{\numberline {3.3}Diccionario de Datos}{9}{}%
+\contentsline {section}{\numberline {4}Implementación del Backend}{13}{}%
+\contentsline {subsection}{\numberline {4.1}Creación del Proyecto y Aplicaciones en Django}{13}{}%
+\contentsline {subsection}{\numberline {4.2}Modelos y Migraciones}{13}{}%
+\contentsline {subsection}{\numberline {4.3}Panel de Administración}{13}{}%
+\contentsline {subsection}{\numberline {4.4}Migración a PostgreSQL y Conexión con Supabase}{14}{}%
+\contentsline {subsection}{\numberline {4.5}Serializers y Vistas (DRF)}{14}{}%
+\contentsline {paragraph}{1. StudentSerializer y StudentViewSet}{15}{}%
+\contentsline {paragraph}{2. GradeSerializer y GradeViewSet}{15}{}%
+\contentsline {paragraph}{3. AnnouncementSerializer y AnnouncementViewSet}{16}{}%
+\contentsline {subsection}{\numberline {4.6}URLs y Rutas}{16}{}%
+\contentsline {subsection}{\numberline {4.7}Autenticación con Tokens}{17}{}%
+\contentsline {section}{\numberline {5}Implementación desl Frontend}{19}{}%
+\contentsline {subsection}{\numberline {5.1}Creación del Proyecto Vue}{19}{}%
+\contentsline {subsection}{\numberline {5.2}Componentes y Servicios}{20}{}%
+\contentsline {subsection}{\numberline {5.3}Conexión a la API REST}{21}{}%
+\contentsline {section}{\numberline {6}Interfaces de Usuario}{22}{}%
+\contentsline {subsection}{\numberline {6.1}Flujo del Usuario Final (CRUD - Core Business)}{22}{}%
+\contentsline {subsection}{\numberline {6.2}Pantallas Clave (Inicio, Inscripción, Consulta, etc.)}{23}{}%
+\contentsline {section}{\numberline {7}Despliegue del Proyecto}{24}{}%
+\contentsline {subsection}{\numberline {7.1}Despliegue del Backend en Render}{24}{}%
+\contentsline {subsection}{\numberline {7.2}Despliegue del Frontend en Netlify}{25}{}%
+\contentsline {subsection}{\numberline {7.3}Conexión entre Frontend y Backend}{26}{}%
+\contentsline {subsection}{\numberline {7.4}URLs Públicas del Sistema}{27}{}%
+\contentsline {section}{\numberline {8}Trabajo en Equipo}{27}{}%
+\contentsline {subsection}{\numberline {8.1}Distribución de Tareas}{27}{}%
+\contentsline {subsection}{\numberline {8.2}Porcentaje de Participación}{27}{}%
+\contentsline {subsection}{\numberline {8.3}Rubrica}{27}{}%
+\contentsline {section}{\numberline {9}Conclusiones}{28}{}%

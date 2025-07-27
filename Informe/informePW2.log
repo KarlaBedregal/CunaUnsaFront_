@@ -1,0 +1,875 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.7.23)  27 JUL 2025 08:15
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**"/Users/ederramos/Documents/Proyectos/Proyecto Final PW2/Informe/informePW2.tex"
+(/Users/ederramos/Documents/Proyectos/Proyecto Final PW2/Informe/informePW2.tex
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-01-18>
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2024/06/29 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2024/06/29 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count196
+\c@section=\count197
+\c@subsection=\count198
+\c@subsubsection=\count199
+\c@paragraph=\count266
+\c@subparagraph=\count267
+\c@figure=\count268
+\c@table=\count269
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\bibindent=\dimen141
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2024/02/08 v1.3d Input encoding file
+\inpenc@prehook=\toks17
+\inpenc@posthook=\toks18
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 274.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2024/04/13 v1.2c Graphics/color driver for pdftex
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1353.
+Package xcolor Info: Model `RGB' extended on input line 1365.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/colortbl/colortbl.sty
+Package: colortbl 2024/07/06 v1.0i Color table columns (DPC)
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/tools/array.sty
+Package: array 2024/10/17 v2.6g Tabular extension package (FMi)
+\col@sep=\dimen142
+\ar@mcellbox=\box52
+\extrarowheight=\dimen143
+\NC@list=\toks19
+\extratabsurround=\skip51
+\backup@length=\skip52
+\ar@cellbox=\box53
+)
+\everycr=\toks20
+\minrowclearance=\skip53
+\rownum=\count270
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
+\f@nch@headwidth=\skip54
+\f@nch@offset@elh=\skip55
+\f@nch@offset@erh=\skip56
+\f@nch@offset@olh=\skip57
+\f@nch@offset@orh=\skip58
+\f@nch@offset@elf=\skip59
+\f@nch@offset@erf=\skip60
+\f@nch@offset@olf=\skip61
+\f@nch@offset@orf=\skip62
+\f@nch@height=\skip63
+\f@nch@footalignment=\skip64
+\f@nch@widthL=\skip65
+\f@nch@widthC=\skip66
+\f@nch@widthR=\skip67
+\@temptokenb=\toks21
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks22
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+ (/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2024/12/12 v1.0g TeX engine tests
+))
+\Gm@cnth=\count271
+\Gm@cntv=\count272
+\c@Gm@tempcnt=\count273
+\Gm@bindingoffset=\dimen144
+\Gm@wd@mp=\dimen145
+\Gm@odd@mp=\dimen146
+\Gm@even@mp=\dimen147
+\Gm@layoutwidth=\dimen148
+\Gm@layoutheight=\dimen149
+\Gm@layouthoffset=\dimen150
+\Gm@layoutvoffset=\dimen151
+\Gm@dimlist=\toks23
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2025/02/14 v25.4 The multilingual framework for pdfLaTeX, LuaLaTeX and XeLaTeX
+\babel@savecnt=\count274
+\U@D=\dimen152
+\l@unhyphenated=\language90
+ (/usr/local/texlive/2025/texmf-dist/tex/generic/babel/txtbabel.def)
+\bbl@readstream=\read2
+\bbl@dirlevel=\count275
+ (/usr/local/texlive/2025/texmf-dist/tex/generic/babel-spanish/spanish.ldf
+Language: spanish.ldf 2021/05/27 v5.0q Spanish support from the babel system
+\es@quottoks=\toks24
+\es@quotdepth=\count276
+Package babel Info: Making " an active character on input line 570.
+Package babel Info: Making . an active character on input line 675.
+Package babel Info: Making < an active character on input line 722.
+Package babel Info: Making > an active character on input line 722.
+)) (/usr/local/texlive/2025/texmf-dist/tex/generic/babel/locale/es/babel-spanish.tex
+Package babel Info: Importing font and identification data for spanish
+(babel)             from babel-es.ini. Reported on input line 11.
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count277
+\lst@gtempboxa=\box54
+\lst@token=\toks25
+\lst@length=\count278
+\lst@currlwidth=\dimen153
+\lst@column=\count279
+\lst@pos=\count280
+\lst@lostspace=\dimen154
+\lst@width=\dimen155
+\lst@newlines=\count281
+\lst@lineno=\count282
+\lst@maxwidth=\dimen156
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/listings/lstpatch.sty
+File: lstpatch.sty 2024/09/23 1.10c (Carsten Heinz)
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
+\c@lstnumber=\count283
+\lst@skipnumbers=\count284
+\lst@framebox=\box55
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2024/09/23 1.10c listings configuration
+))
+Package: listings 2024/09/23 1.10c (Carsten Heinz)
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 106.
+)
+\Gin@req@height=\dimen157
+\Gin@req@width=\dimen158
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count285
+\float@exts=\toks26
+\float@box=\box56
+\@float@everytoks=\toks27
+\@floatcapt=\box57
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2024-10-27 v4.22 Multi-page Table package (DPC)
+\LTleft=\skip68
+\LTright=\skip69
+\LTpre=\skip70
+\LTpost=\skip71
+\LTchunksize=\count286
+\LTcapwidth=\dimen159
+\LT@head=\box58
+\LT@firsthead=\box59
+\LT@foot=\box60
+\LT@lastfoot=\box61
+\LT@gbox=\box62
+\LT@cols=\count287
+\LT@rows=\count288
+\c@LT@tables=\count289
+\c@LT@chunks=\count290
+\LT@p@ftn=\toks28
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
+\multirow@colwidth=\skip72
+\multirow@cntb=\count291
+\multirow@dima=\skip73
+\bigstrutjot=\dimen160
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/tools/tabularx.sty
+Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
+\TX@col@width=\dimen161
+\TX@old@table=\dimen162
+\TX@old@col=\dimen163
+\TX@target=\dimen164
+\TX@delta=\dimen165
+\TX@cols=\count292
+\TX@ftn=\toks29
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count293
+\l__pdf_internal_box=\box63
+) (./informePW2.aux
+LaTeX Info: Redefining \. on input line 8.
+LaTeX Info: Redefining \% on input line 8.
+)
+\openout1 = `informePW2.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+ (/usr/local/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count294
+\scratchdimen=\dimen166
+\scratchbox=\box64
+\nofMPsegments=\count295
+\nofMParguments=\count296
+\everyMPshowfont=\toks30
+\MPscratchCnt=\count297
+\MPscratchDim=\dimen167
+\MPnumerator=\count298
+\makeMPintoPDFobject=\count299
+\everyMPtoPDFconversion=\toks31
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
+))
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(71.13188pt, 472.03123pt, 71.13188pt)
+* v-part:(T,H,B)=(71.13188pt, 652.70622pt, 71.13188pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=472.03123pt
+* \textheight=652.70622pt
+* \oddsidemargin=-1.1381pt
+* \evensidemargin=-1.1381pt
+* \topmargin=-38.1381pt
+* \headheight=46.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=20.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+LaTeX Info: Redefining \. on input line 108.
+LaTeX Info: Redefining \% on input line 108.
+\c@lstlisting=\count300
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 128.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 128.
+(./informePW2.toc
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+
+
+<images/sistemas-logo.png, id=1, 165.61874pt x 47.17625pt>
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 31.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+<images/abet-logo.png, id=3, 2055.68pt x 2055.68pt>
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 31.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+[1{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+
+ <./images/sistemas-logo.png> <./images/abet-logo.png>])
+\tf@toc=\write3
+\openout3 = `informePW2.toc'.
+
+
+
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 157.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 157.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+[2]
+
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 193.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 193.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+[3]
+
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 244.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 244.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+[4]
+
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 294.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 294.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+[5]
+
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 326.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 326.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+[6]
+<images/RI1.png, id=32, 1010.77625pt x 647.41875pt>
+File: images/RI1.png Graphic file (type png)
+<use images/RI1.png>
+Package pdftex.def Info: images/RI1.png  used on input line 346.
+(pdftex.def)             Requested size: 330.42041pt x 211.64345pt.
+<images/RI2.png, id=33, 847.165pt x 691.58376pt>
+File: images/RI2.png Graphic file (type png)
+<use images/RI2.png>
+Package pdftex.def Info: images/RI2.png  used on input line 352.
+(pdftex.def)             Requested size: 330.42041pt x 269.73769pt.
+
+
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 355.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 355.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+[7 <./images/RI1.png>]
+<images/RI3.png, id=39, 922.44624pt x 681.54625pt>
+File: images/RI3.png Graphic file (type png)
+<use images/RI3.png>
+Package pdftex.def Info: images/RI3.png  used on input line 358.
+(pdftex.def)             Requested size: 330.42041pt x 244.12932pt.
+
+
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 387.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 387.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+[8 <./images/RI2.png> <./images/RI3.png>]
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 461.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 461.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+ [9]
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 545.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 545.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+ [10]
+
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 638.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 638.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+[11]
+
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 742.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 742.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+[12] (/usr/local/texlive/2025/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2024/09/23 1.10c listings language file
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2024/09/23 1.10c listings language file
+)
+
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 787.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 787.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+[13{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] (/usr/local/texlive/2025/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2024/09/23 1.10c listings language file
+)
+
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 836.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 836.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+[14]
+
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 906.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 906.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+[15]
+
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 970.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 970.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+[16]
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 1043.
+
+
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 1058.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 1058.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+[17]
+
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 1102.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 1102.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+[18]
+
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 1165.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 1165.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+[19] (/usr/local/texlive/2025/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2024/09/23 1.10c listings language file
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
+)
+
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 1219.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 1219.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+[20]
+Overfull \hbox (13.22403pt too wide) in paragraph at lines 1252--1253
+[]\OT1/cmr/m/n/10 Se de-fi-ne una ins-tan-cia de \OT1/cmtt/m/n/10 Axios \OT1/cmr/m/n/10 con la URL ba-se to-ma-da des-de una va-ria-ble de en-torno (\OT1/cmtt/m/n/10 VUE[]APP[]API[]URL\OT1/cmr/m/n/10 ). 
+ []
+
+
+
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 1273.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 1273.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+[21]
+Overfull \hbox (11.53763pt too wide) in paragraph at lines 1277--1278
+[]\OT1/cmr/bx/n/10 Ejemplo de con-su-mo en un com-po-nen-te: \OT1/cmr/m/n/10 el m^^Seto-do \OT1/cmtt/m/n/10 login \OT1/cmr/m/n/10 des-de la vis-ta \OT1/cmtt/m/n/10 Login.vue \OT1/cmr/m/n/10 in-vo-ca \OT1/cmtt/m/n/10 api.login()
+ []
+
+
+
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 1331.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 1331.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+[22]
+<images/login.jpeg, id=94, 1606.0pt x 687.56876pt>
+File: images/login.jpeg Graphic file (type jpg)
+<use images/login.jpeg>
+Package pdftex.def Info: images/login.jpeg  used on input line 1356.
+(pdftex.def)             Requested size: 377.62642pt x 161.6731pt.
+<images/welcome.jpeg, id=95, 1606.0pt x 694.595pt>
+File: images/welcome.jpeg Graphic file (type jpg)
+<use images/welcome.jpeg>
+Package pdftex.def Info: images/welcome.jpeg  used on input line 1362.
+(pdftex.def)             Requested size: 377.62642pt x 163.32523pt.
+
+
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 1365.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 1365.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+[23 <./images/login.jpeg>]
+<images/cursos.jpeg, id=99, 1606.0pt x 529.98pt>
+File: images/cursos.jpeg Graphic file (type jpg)
+<use images/cursos.jpeg>
+Package pdftex.def Info: images/cursos.jpeg  used on input line 1368.
+(pdftex.def)             Requested size: 377.62642pt x 124.61809pt.
+<images/admin.jpeg, id=100, 1606.0pt x 675.52374pt>
+File: images/admin.jpeg Graphic file (type jpg)
+<use images/admin.jpeg>
+Package pdftex.def Info: images/admin.jpeg  used on input line 1374.
+(pdftex.def)             Requested size: 377.62642pt x 158.84087pt.
+
+
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 1385.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 1385.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+[24 <./images/welcome.jpeg> <./images/cursos.jpeg> <./images/admin.jpeg>]
+
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 1438.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 1438.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+[25]
+Overfull \hbox (11.00845pt too wide) in paragraph at lines 1460--1461
+[]\OT1/cmr/bx/n/10 Seguridad: \OT1/cmr/m/n/10 El bac-kend en-tre-ga un \OT1/cmtt/m/n/10 token JWT \OT1/cmr/m/n/10 tras el ini-cio de se-si^^Son. Es-te se al-ma-ce-na en el \OT1/cmtt/m/n/10 localStorage
+ []
+
+
+
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 1495.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 1495.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+[26]
+Overfull \hbox (101.5771pt too wide) in paragraph at lines 1496--1497
+[]\OT1/cmr/bx/n/10 Playlist de You-Tu-be del Pro-yec-to: $\OT1/cmtt/m/n/10 https : / / www . youtube . com / playlist ? list = PLxcXnsVAKkkOeRiS-[]-[]BGBqqsqF3An7Tyf$ 
+ []
+
+
+
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 1541.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 1541.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+[27]
+Underfull \hbox (badness 10000) in paragraph at lines 1548--1548
+[]|\OT1/cmr/bx/n/10 Regular
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1549--1549
+[]|\OT1/cmr/bx/n/10 Deficiente
+ []
+
+
+Overfull \hbox (17.29985pt too wide) in alignment at lines 1542--1553
+ [] [] [] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1560--1560
+[]|\OT1/cmr/bx/n/10 Regular
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1561--1561
+[]|\OT1/cmr/bx/n/10 Deficiente
+ []
+
+
+Overfull \hbox (17.29985pt too wide) in alignment at lines 1553--1565
+ [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (17.29985pt too wide) in alignment at lines 1565--1568
+ [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (17.29985pt too wide) in alignment at lines 1568--1571
+ [] [] [] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 3826) in paragraph at lines 1573--1573
+[]|\OT1/cmr/m/n/10 Producci^^Son de
+ []
+
+
+Underfull \hbox (badness 1852) in paragraph at lines 1574--1574
+[]|\OT1/cmr/m/n/10 Muy cla-ro, es-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1575--1575
+[]|\OT1/cmr/m/n/10 Claro, bue-na
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1575--1575
+\OT1/cmr/m/n/10 ca-li-dad. Ca-si
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1581--1581
+[]|\OT1/cmr/m/n/10 Backend en
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1582--1582
+[]|\OT1/cmr/m/n/10 Funciona sin
+ []
+
+
+Underfull \hbox (badness 2460) in paragraph at lines 1582--1582
+\OT1/cmr/m/n/10 erro-res. Se-gu-ri-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1583--1583
+[]|\OT1/cmr/m/n/10 Funciona con
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1584--1584
+[]|\OT1/cmr/m/n/10 Parcialmente
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1589--1589
+[]|\OT1/cmr/m/n/10 Frontend en
+ []
+
+
+Underfull \hbox (badness 1881) in paragraph at lines 1590--1590
+[]|\OT1/cmr/m/n/10 Interfaz fun-cio-
+ []
+
+
+Underfull \hbox (badness 1320) in paragraph at lines 1593--1593
+[]|\OT1/cmr/m/n/10 Confuso o no
+ []
+
+
+Underfull \hbox (badness 2285) in paragraph at lines 1598--1598
+\OT1/cmr/m/n/10 fi-ca-do y do-cu-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1600--1600
+[]|\OT1/cmr/m/n/10 Incompleto,
+ []
+
+
+Underfull \hbox (badness 5119) in paragraph at lines 1601--1601
+[]|\OT1/cmr/m/n/10 No hay bac-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1605--1605
+[]|\OT1/cmr/m/n/10 GitHub Bac-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1607--1607
+[]|\OT1/cmr/m/n/10 Organizado.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1607--1607
+\OT1/cmr/m/n/10 Men-sa-jes
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1608--1608
+[]|\OT1/cmr/m/n/10 Desordenado.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1608--1608
+\OT1/cmr/m/n/10 Men-sa-jes
+ []
+
+
+Underfull \hbox (badness 1158) in paragraph at lines 1609--1609
+[]|\OT1/cmr/m/n/10 Ca^^Soti-co. To-do
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1613--1613
+[]|\OT1/cmr/m/n/10 GitHub Fron-
+ []
+
+
+Underfull \hbox (badness 1057) in paragraph at lines 1617--1617
+[]|\OT1/cmr/m/n/10 Sin es-truc-tu-ra
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1622--1622
+[]|\OT1/cmr/m/n/10 Completo,
+ []
+
+
+Underfull \hbox (badness 2556) in paragraph at lines 1623--1623
+[]|\OT1/cmr/m/n/10 Buen an^^Sali-sis,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1624--1624
+[]|\OT1/cmr/m/n/10 Cumple, con
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1624--1624
+\OT1/cmr/m/n/10 al-gu-nos erro-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1625--1625
+[]|\OT1/cmr/m/n/10 Incompleto
+ []
+
+
+Underfull \hbox (badness 2088) in paragraph at lines 1625--1625
+\OT1/cmr/m/n/10 o con erro-res
+ []
+
+
+Overfull \hbox (17.29985pt too wide) in alignment at lines 1571--1631
+ [] [] [] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 6559) in paragraph at lines 1654--1655
+[]\OT1/cmr/m/n/10 Django Soft-wa-re Foun-da-tion, \Djan-go Do-cu-men-ta-tion," [On-li-ne]. Avai-la-ble: $\OT1/cmtt/m/n/10 https : / / docs .
+ []
+
+
+
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 1664.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 1664.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+[28]
+
+File: images/sistemas-logo.png Graphic file (type png)
+<use images/sistemas-logo.png>
+Package pdftex.def Info: images/sistemas-logo.png  used on input line 1678.
+(pdftex.def)             Requested size: 76.82234pt x 21.88272pt.
+File: images/abet-logo.png Graphic file (type png)
+<use images/abet-logo.png>
+Package pdftex.def Info: images/abet-logo.png  used on input line 1678.
+(pdftex.def)             Requested size: 34.14322pt x 34.12741pt.
+[29] (./informePW2.aux
+LaTeX Info: Redefining \. on input line 8.
+LaTeX Info: Redefining \% on input line 8.
+)
+ ***********
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-01-18>
+ ***********
+ ) 
+Here is how much of TeX's memory you used:
+ 7138 strings out of 473190
+ 109416 string characters out of 5715800
+ 976621 words of memory out of 5000000
+ 30331 multiletter control sequences out of 15000+600000
+ 562706 words of font info for 50 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 57i,17n,70p,604b,1997s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb>
+Output written on informePW2.pdf (29 pages, 941591 bytes).
+PDF statistics:
+ 168 PDF objects out of 1000 (max. 8388607)
+ 100 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 46 words of extra memory for PDF output out of 10000 (max. 10000000)
+
