@@ -48,29 +48,39 @@ export default createStore({
   actions: {
     async login({ commit }, credentials) {
       try {
-        commit('SET_LOADING', true)
-        const response = await api.login(credentials)
+        commit('SET_LOADING', true);
 
-        if (response.data.success) {
-          const { user, token } = response.data.data
+        const response = await api.login(credentials);
+        console.log("🔍 Login response:", response);
 
-          localStorage.setItem('token', token)
-          localStorage.setItem('user', JSON.stringify(user))
+        const success = response?.data?.success;
+        const data = response?.data?.data;
 
-          commit('SET_TOKEN', token)
-          commit('SET_USER', user)
-          commit('SET_ERROR', null)
+        if (success && data?.user && data?.token) {
+          const { user, token } = data;
 
-          return response.data
+          localStorage.setItem('token', token);
+          localStorage.setItem('user', JSON.stringify(user));
+
+          commit('SET_TOKEN', token);
+          commit('SET_USER', user);
+          commit('SET_ERROR', null);
+
+          return response.data;
+        } else {
+          const msg = response?.data?.message || 'Respuesta inesperada del servidor';
+          commit('SET_ERROR', msg);
+          throw new Error(msg);
         }
+
       } catch (error) {
-        commit('SET_ERROR', error.response?.data?.message || 'Error de login')
-        throw error
+        console.error('❌ Error en login:', error);
+        commit('SET_ERROR', error.response?.data?.message || 'Error de login');
+        throw error;
       } finally {
-        commit('SET_LOADING', false)
+        commit('SET_LOADING', false);
       }
     },
-
     async register({ commit }, userData) {
       try {
         commit('SET_LOADING', true)
