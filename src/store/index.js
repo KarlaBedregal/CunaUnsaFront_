@@ -50,35 +50,28 @@ export default createStore({
       try {
         commit('SET_LOADING', true);
 
-<<<<<<< HEAD
-        const response = await api.login(credentials);
-        console.log("🔍 Login response:", response);
-=======
-        if (response.data.success) {
-          // CORREGIDO: extraer datos reales
-          const user = response.data.user_data
-          const token = response.data.tokens?.access
->>>>>>> ff0bb367 (dfwgregee)
+const response = await api.login(credentials);
+console.log("🔍 Login response:", response);
 
-        const success = response?.data?.success;
-        const data = response?.data?.data;
+const success = response?.data?.success;
+const data = response?.data?.data;
 
-        if (success && data?.user && data?.token) {
-          const { user, token } = data;
+if (success && data?.user && data?.token) {
+  const { user, token } = data;
 
-          localStorage.setItem('token', token);
-          localStorage.setItem('user', JSON.stringify(user));
+  localStorage.setItem('token', token);
+  localStorage.setItem('user', JSON.stringify(user));
 
-          commit('SET_TOKEN', token);
-          commit('SET_USER', user);
-          commit('SET_ERROR', null);
+  commit('SET_TOKEN', token);
+  commit('SET_USER', user);
+  commit('SET_ERROR', null);
 
-          return response.data;
-        } else {
-          const msg = response?.data?.message || 'Respuesta inesperada del servidor';
-          commit('SET_ERROR', msg);
-          throw new Error(msg);
-        }
+  return response.data;
+} else {
+  const msg = response?.data?.message || 'Respuesta inesperada del servidor';
+  commit('SET_ERROR', msg);
+  throw new Error(msg);
+}
 
       } catch (error) {
         console.error('❌ Error en login:', error);
