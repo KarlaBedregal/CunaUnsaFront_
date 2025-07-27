@@ -91,19 +91,19 @@
             <div class="row">
               <div class="col-md-3 mb-3">
                 <div class="stat-card primary">
-                  <div class="stat-number">{{ students.length }}</div>
+                  <div class="stat-number">{{ students?.length || 0 }}</div>
                   <div class="stat-label">👨‍🎓 Estudiantes Activos</div>
                 </div>
               </div>
               <div class="col-md-3 mb-3">
                 <div class="stat-card success">
-                  <div class="stat-number">{{ teachers.length }}</div>
+                  <div class="stat-number">{{ teachers?.length || 0 }}</div>
                   <div class="stat-label">👨‍🏫 Docentes</div>
                 </div>
               </div>
               <div class="col-md-3 mb-3">
                 <div class="stat-card info">
-                  <div class="stat-number">{{ courses.length }}</div>
+                  <div class="stat-number">{{ courses?.length || 0 }}</div>
                   <div class="stat-label">📚 Cursos Disponibles</div>
                 </div>
               </div>
