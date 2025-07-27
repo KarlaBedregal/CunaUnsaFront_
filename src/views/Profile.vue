@@ -22,7 +22,7 @@
 <script>
 import api from '@/services/api'
 export default {
-    name: 'Profile',
+    name: 'ProfileView',
   data() {
     return { profile: null }
   },
