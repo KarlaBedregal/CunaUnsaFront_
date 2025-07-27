@@ -57,20 +57,25 @@ export default createStore({
       const token = response?.data?.tokens?.access;
 
       if (success && user && token) {
-        localStorage.setItem('token', token);
-        localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
 
-        commit('SET_TOKEN', token);
-        commit('SET_USER', user);
-        commit('SET_ERROR', null);
+      commit('SET_TOKEN', token);
+      commit('SET_USER', user);
+      commit('SET_ERROR', null);
 
-        return response.data;
-      } else {
-        // Solo lanzar error si success es false
-        const msg = response?.data?.message || 'Respuesta inesperada del servidor';
-        commit('SET_ERROR', msg);
-        throw new Error(msg);
-      }
+      return response.data;
+    } else if (success === false) {
+      // Solo lanzar error si success es false
+      const msg = response?.data?.message || 'Respuesta inesperada del servidor';
+      commit('SET_ERROR', msg);
+      throw new Error(msg);
+    } else {
+      // Si falta user o token, es error de datos
+      const msg = 'Datos de usuario o token faltantes';
+      commit('SET_ERROR', msg);
+      throw new Error(msg);
+    }
     } catch (error) {
       console.error('❌ Error en login:', error);
       commit('SET_ERROR', error.response?.data?.message || 'Error de login');
