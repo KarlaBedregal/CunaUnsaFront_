@@ -2,6 +2,8 @@ import axios from 'axios';
 
 // ✅ Configurar la URL base desde el entorno (.env)
 const API_BASE_URL = process.env.VUE_APP_API_URL;
+console.log("🌐 API conectando a:", API_BASE_URL);
+
 
 // ✅ Crear instancia de Axios
 const apiInstance = axios.create({
