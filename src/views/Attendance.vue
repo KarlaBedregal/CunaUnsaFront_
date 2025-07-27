@@ -13,8 +13,8 @@
 <script>
 import api from '@/services/api'
 export default {
+  name: 'AttendanceView',
   data() {
-    name: 'AttendanceView',
     return { attendance: [] }
   },
   async mounted() {
