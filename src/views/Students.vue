@@ -20,11 +20,11 @@
       </form>
     </div>
     <ul>
-        <li v-for="student in students" :key="student.id">
-        <span v-if="editingId !== student.id">
-          {{ student.full_name }} - DNI: {{ student.dni }}
-          <span v-if="canEdit(student)" class="ms-2">
-            <button class="btn btn-sm btn-warning" @click="editStudent(student)">Editar</button>
+        <li v-for="_student in students" :key="_student.id">
+        <span v-if="editingId !== _student.id">
+          {{ _student.full_name }} - DNI: {{ _student.dni }}
+          <span v-if="canEdit(_student)" class="ms-2">
+            <button class="btn btn-sm btn-warning" @click="editStudent(_student)">Editar</button>
           </span>
           <span v-if="canDelete" class="ms-2">
             <button class="btn btn-sm btn-danger" @click="deleteStudent(student.id)">Eliminar</button>
