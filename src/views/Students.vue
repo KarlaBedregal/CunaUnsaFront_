@@ -19,8 +19,8 @@
       </form>
     </div>
     <ul>
-          <!-- eslint-disable-next-line vue/no-unused-vars -->
-          <li v-for="student in students" :key="student.id">
+        <!-- eslint-disable-next-line no-unused-vars -->
+        <li v-for="student in students" :key="student.id">
         <span v-if="editingId !== student.id">
           {{ student.full_name }} - DNI: {{ student.dni }}
           <span v-if="canEdit(student)" class="ms-2">
