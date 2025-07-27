@@ -1,8 +1,7 @@
-<!-- filepath: /home/karla/KARLITA/Cuna API unsa/cuna-frontend/src/views/Dashboard.vue -->
 <template>
   <div class="dashboard-view">
     <navbar-component />
-    
+
     <!-- Hero Section -->
     <div class="hero-section">
       <div class="hero-overlay">
@@ -36,47 +35,37 @@
 
       <!-- Main Action Cards -->
       <div class="row justify-content-center mb-5">
-        <!-- Ayuda Estudiante -->
-        <div class="col-lg-5 col-md-6 mb-4">
-          <div class="action-card student-help">
+        <div
+          v-for="card in dashboardCards"
+          :key="card.title"
+          class="col-lg-4 col-md-6 mb-4"
+        >
+          <div :class="['action-card', card.class]">
             <div class="card-icon">
               <div class="icon-circle">
-                <i class="fas fa-user-graduate"></i>
+                <i :class="card.icon"></i>
               </div>
             </div>
             <div class="card-content">
-              <h3>Ayuda Estudiante</h3>
-              <p>Soporte y asistencia para estudiantes en el uso de la plataforma virtual</p>
+              <h3>{{ card.title }}</h3>
+              <p>{{ card.description }}</p>
               <div class="card-actions">
-                <router-link to="/students" class="btn btn-primary">
-                  <i class="fas fa-users"></i> Gestionar Estudiantes ({{ students.length }})
+                <router-link
+                  v-for="btn in card.buttons"
+                  :key="btn.text"
+                  :to="btn.route"
+                  :class="btn.class"
+                >
+                  <i :class="btn.icon"></i> {{ btn.text }}
+                  <span v-if="btn.count !== undefined">({{ btn.count }})</span>
                 </router-link>
-                <button class="btn btn-outline-primary" @click="openStudentHelp">
+                <button
+                  v-if="card.help"
+                  class="btn btn-outline-primary"
+                  @click="openStudentHelp"
+                >
                   <i class="fas fa-question-circle"></i> Centro de Ayuda
                 </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- App Aulas Virtuales -->
-        <div class="col-lg-5 col-md-6 mb-4">
-          <div class="action-card virtual-classroom">
-            <div class="card-icon">
-              <div class="icon-circle">
-                <i class="fas fa-chalkboard-teacher"></i>
-              </div>
-            </div>
-            <div class="card-content">
-              <h3>App Aulas Virtuales</h3>
-              <p>Acceso a las aulas virtuales y herramientas de enseñanza digital</p>
-              <div class="card-actions">
-                <router-link to="/courses" class="btn btn-success">
-                  <i class="fas fa-book"></i> Ver Cursos ({{ courses.length }})
-                </router-link>
-                <router-link to="/teachers" class="btn btn-outline-success">
-                  <i class="fas fa-chalkboard-teacher"></i> Docentes ({{ teachers.length }})
-                </router-link>
               </div>
             </div>
           </div>
@@ -176,33 +165,90 @@ export default {
   components: {
     NavbarComponent
   },
-  
   computed: {
     ...mapGetters(['currentUser', 'students', 'teachers', 'courses', 'loading'])
   },
-  
-  methods: {
-    ...mapActions(['fetchStudents', 'fetchTeachers', 'fetchCourses']),
-    
-    openStudentHelp() {
-      // Abrir modal de ayuda o redirigir
-      console.log('Abriendo centro de ayuda para estudiantes')
-    },
-    
-    generateReport() {
-      // Generar reporte del sistema
-      console.log('Generando reporte del sistema')
+  data() {
+    return {
+      dashboardCards: [
+        {
+          title: 'Ayuda Estudiante',
+          description: 'Soporte y asistencia para estudiantes en el uso de la plataforma virtual',
+          icon: 'fas fa-user-graduate',
+          class: 'student-help',
+          buttons: [
+            {
+              text: 'Gestionar Estudiantes',
+              route: '/students',
+              icon: 'fas fa-users',
+              class: 'btn btn-primary',
+              count: this.students?.length
+            }
+          ],
+          help: true
+        },
+        {
+          title: 'App Aulas Virtuales',
+          description: 'Acceso a las aulas virtuales y herramientas de enseñanza digital',
+          icon: 'fas fa-chalkboard-teacher',
+          class: 'virtual-classroom',
+          buttons: [
+            {
+              text: 'Ver Cursos',
+              route: '/courses',
+              icon: 'fas fa-book',
+              class: 'btn btn-success',
+              count: this.courses?.length
+            },
+            {
+              text: 'Docentes',
+              route: '/teachers',
+              icon: 'fas fa-chalkboard-teacher',
+              class: 'btn btn-outline-success',
+              count: this.teachers?.length
+            }
+          ]
+        },
+        {
+          title: 'Pagos y Documentos',
+          description: 'Gestión de pagos y documentos importantes',
+          icon: 'fas fa-file-invoice-dollar',
+          class: 'payments-docs',
+          buttons: [
+            {
+              text: 'Pagos',
+              route: '/payments',
+              icon: 'fas fa-money-check-alt',
+              class: 'btn btn-danger'
+            },
+            {
+              text: 'Documentos',
+              route: '/documents',
+              icon: 'fas fa-file-alt',
+              class: 'btn btn-outline-secondary'
+            }
+          ]
+        }
+      ]
     }
   },
-  
+  methods: {
+    ...mapActions(['fetchStudents', 'fetchTeachers', 'fetchCourses']),
+    openStudentHelp() {
+      // Abrir modal de ayuda o redirigir
+      alert('Abriendo centro de ayuda para estudiantes')
+    },
+    generateReport() {
+      // Generar reporte del sistema
+      alert('Generando reporte del sistema')
+    }
+  },
   async created() {
     await this.fetchStudents()
     await this.fetchTeachers()
     await this.fetchCourses()
   }
 }
-</script>
-
 <style scoped>
 .dashboard-view {
   min-height: 100vh;
@@ -363,6 +409,10 @@ export default {
   background: linear-gradient(135deg, #f093fb, #f5576c);
 }
 
+.payments-docs .icon-circle {
+  background: linear-gradient(135deg, #43cea2, #185a9d);
+}
+
 .card-content h3 {
   color: #2c3e50;
   font-size: 1.5rem;
@@ -500,23 +550,18 @@ export default {
   .hero-title {
     font-size: 2.5rem;
   }
-  
   .hero-subtitle {
     font-size: 1.8rem;
   }
-  
   .hero-year {
     font-size: 1.5rem;
   }
-  
   .office-title {
     font-size: 2rem;
   }
-  
   .action-card {
     padding: 2rem 1.5rem;
   }
-  
   .dashboard-content {
     padding: 3rem 1rem 2rem;
   }
@@ -526,15 +571,12 @@ export default {
   .hero-title {
     font-size: 2rem;
   }
-  
   .hero-subtitle {
     font-size: 1.5rem;
   }
-  
   .card-actions {
     gap: 0.5rem;
   }
-  
   .card-actions .btn {
     padding: 10px 15px;
     font-size: 0.9rem;
