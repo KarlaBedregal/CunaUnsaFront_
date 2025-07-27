@@ -155,7 +155,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import NavbarComponent from '@/components/common/NavbarComponent.vue'
@@ -204,8 +203,7 @@ export default {
               text: 'Docentes',
               route: '/teachers',
               icon: 'fas fa-chalkboard-teacher',
-              class: 'btn btn-outline-success',
-              count: this.teachers?.length
+              class: 'btn btn-outline-success'
             }
           ]
         },
@@ -235,11 +233,9 @@ export default {
   methods: {
     ...mapActions(['fetchStudents', 'fetchTeachers', 'fetchCourses']),
     openStudentHelp() {
-      // Abrir modal de ayuda o redirigir
       alert('Abriendo centro de ayuda para estudiantes')
     },
     generateReport() {
-      // Generar reporte del sistema
       alert('Generando reporte del sistema')
     }
   },
@@ -249,6 +245,7 @@ export default {
     await this.fetchCourses()
   }
 }
+</script>
 <style scoped>
 .dashboard-view {
   min-height: 100vh;
