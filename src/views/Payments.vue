@@ -21,7 +21,10 @@
     </div>
     <hr class="my-4" />
     <h4>Lista de pagos</h4>
-    <table class="table table-striped">
+    <div v-if="payments.length === 0">
+      <p>No hay pagos disponibles.</p>
+    </div>
+    <table v-else class="table table-striped">
       <thead>
         <tr>
           <th>ID</th>
@@ -34,7 +37,7 @@
       <tbody>
         <tr v-for="payment in payments" :key="payment.id">
           <td>{{ payment.id }}</td>
-          <td>{{ payment.student }}</td>
+          <td>{{ payment.student_name || payment.student }}</td>
           <td>{{ payment.amount }}</td>
           <td>{{ payment.date }}</td>
           <td v-if="isAdmin">
@@ -68,7 +71,7 @@ export default {
         const res = await api.getPayments()
         this.payments = res.data.results || res.data.data || res.data
       } catch (error) {
-        console.error('Error al obtener pagos:', error)
+        this.payments = []
       }
     },
     async createPayment() {
@@ -77,7 +80,6 @@ export default {
         this.newPayment = { student: '', amount: '', date: '' }
         this.fetchPayments()
       } catch (error) {
-        console.error('Error al crear pago:', error)
         alert('No tienes permisos o hubo un error al crear el pago.')
       }
     },
@@ -86,7 +88,6 @@ export default {
         await api.deletePayment(id)
         this.fetchPayments()
       } catch (error) {
-        console.error('Error al eliminar pago:', error)
         alert('No tienes permisos o hubo un error al eliminar.')
       }
     }

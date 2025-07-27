@@ -1,4 +1,5 @@
-import axios from 'axios';
+import axios from 'axios'
+
 
 // ✅ Configurar la URL base desde el entorno (.env)
 const API_BASE_URL = process.env.VUE_APP_API_URL;
@@ -75,64 +76,92 @@ const api = {
   getProfile() {
     return apiInstance.get('/api/auth/profile/');
   },
-  // --- Estudiantes ---
+
+  getAttendance() {
+    return apiInstance.get('/api/attendance/');
+  },
+  createAttendance(data) {
+    return apiInstance.post('/api/attendance/', data);
+  },
+  updateAttendance(id, data) {
+    return apiInstance.put(`/api/attendance/${id}/`, data);
+  },
+  deleteAttendance(id) {
+    return apiInstance.delete(`/api/attendance/${id}/`);
+  },
+  getChats() {
+    return apiInstance.get('/api/chats/');
+  },
+  createChat(data) {
+    return apiInstance.post('/api/chats/', data);
+  },
+  updateChat(id, data) {
+    return apiInstance.put(`/api/chats/${id}/`, data);
+  },
+  deleteChat(id) {
+    return apiInstance.delete(`/api/chats/${id}/`);
+  },
+  getDocuments() {
+    return apiInstance.get('/api/documents/');
+  },
+  createDocument(data) {
+    return apiInstance.post('/api/documents/', data, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+  },
+  getInscriptions() {
+    return apiInstance.get('/api/inscriptions/');
+  },
+  createInscription(data) {
+    return apiInstance.post('/api/inscriptions/', data);
+  },
+  getPayments() {
+    return apiInstance.get('/api/payments/');
+  },
+  createPayment(data) {
+    return apiInstance.post('/api/payments/', data);
+  },
+  deletePayment(id) {
+    return apiInstance.delete(`/api/payments/${id}/`);
+  },
+  getPeriods() {
+    return apiInstance.get('/api/periods/');
+  },
+  createPeriod(data) {
+    return apiInstance.post('/api/periods/', data);
+  },
+  updatePeriod(id, data) {
+    return apiInstance.put(`/api/periods/${id}/`, data);
+  },
+  deletePeriod(id) {
+    return apiInstance.delete(`/api/periods/${id}/`);
+  },
+  getProfile() {
+    return apiInstance.get('/api/auth/profile/');
+  },
   getStudents() {
     return apiInstance.get('/api/students/');
   },
-
-  getStudent(id) {
-    return apiInstance.get(`/api/students/${id}/`);
+  createStudent(data) {
+    return apiInstance.post('/api/students/', data);
   },
-
-  createStudent(studentData) {
-    return apiInstance.post('/api/students/', studentData);
+  updateStudent(id, data) {
+    return apiInstance.put(`/api/students/${id}/`, data);
   },
-
-  updateStudent(id, studentData) {
-    return apiInstance.put(`/api/students/${id}/`, studentData);
-  },
-
   deleteStudent(id) {
     return apiInstance.delete(`/api/students/${id}/`);
   },
-
-  // --- Docentes ---
   getTeachers() {
     return apiInstance.get('/api/teachers/');
   },
-
-  createTeacher(data) {
-    return apiInstance.post('/api/teachers/', data);
+  getWorkloads() {
+    return apiInstance.get('/api/workloads/');
   },
-
-  updateTeacher(id, teacher) {
-    return apiInstance.put(`/api/teachers/${id}/`, teacher);
+  createWorkload(data) {
+    return apiInstance.post('/api/workloads/', data);
   },
-
-  deleteTeacher(id) {
-    return apiInstance.delete(`/api/teachers/${id}/`);
-  },
-
-  // --- Cursos ---
-  getCourses() {
-    return apiInstance.get('/api/courses/');
-  },
-
-  createCourse(data) {
-    return apiInstance.post('/api/courses/', data);
-  },
-
-  updateCourse(id, data) {
-    return apiInstance.put(`/api/courses/${id}/`, data);
-  },
-
-  deleteCourse(id) {
-    return apiInstance.delete(`/api/courses/${id}/`);
-  },
-
-  // --- Usuarios ---
-  getUsers() {
-    return apiInstance.get('/api/users/');
+  updateWorkload(id, data) {
+    return apiInstance.put(`/api/workloads/${id}/`, data);
   },
 };
 
