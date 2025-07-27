@@ -4,7 +4,20 @@ import axios from 'axios';
 const API_BASE_URL = process.env.VUE_APP_API_URL;
 console.log("🌐 API conectando a:", API_BASE_URL);
 
-
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
 // ✅ Crear instancia de Axios
 const apiInstance = axios.create({
   baseURL: API_BASE_URL,
@@ -46,7 +59,13 @@ apiInstance.get('/api/health/')
 const api = {
   // --- Autenticación ---
   login(credentials) {
-    return apiInstance.post('/api/auth/login/', credentials);
+    // Obtener el CSRF token de las cookies
+    const csrfToken = getCookie('csrftoken');
+    return apiInstance.post('/api/auth/login/', credentials, {
+      headers: {
+        'X-CSRFToken': csrfToken
+      }
+    });
   },
 
   logout() {
