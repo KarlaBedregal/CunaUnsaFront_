@@ -161,12 +161,12 @@ export default createStore({
   },
 
   getters: {
-    isAuthenticated: state => state.isAuthenticated,
-    currentUser: state => state.user,
-    students: state => state.students,
-    teachers: state => state.teachers,
-    courses: state => state.courses,
-    loading: state => state.loading,
-    error: state => state.error
+  isAuthenticated: state => !!state.token,
+  currentUser: state => state.user,
+  students: state => state.students,
+  teachers: state => state.teachers,
+  courses: state => state.courses,
+  loading: state => state.loading,
+  error: state => state.error
   },
 })

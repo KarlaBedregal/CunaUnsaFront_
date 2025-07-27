@@ -76,6 +76,7 @@ const router = createRouter({
 // ⛔️ Guards de navegación
 router.beforeEach((to, from, next) => {
   const isAuthenticated = store.getters.isAuthenticated
+  console.log('Guard: isAuthenticated =', isAuthenticated)
 
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!isAuthenticated) {
