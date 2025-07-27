@@ -1,58 +1,70 @@
-<!-- filepath: c:\CUNA-UNSA-\CunaFrontend\src\views\Courses.vue -->
 <template>
-  <div class="container py-4">
-    <h2 class="mb-4 text-center">📚 Cursos Registrados</h2>
+  <div class="container mt-4">
+    <h2 class="text-center mb-4">📚 Cursos</h2>
 
-    <div v-if="loading" class="text-center">
-      <div class="spinner-border" role="status"></div>
-    </div>
+    <!-- Mensaje de carga -->
+    <div v-if="loading" class="text-center">Cargando cursos...</div>
 
-    <div v-else-if="courses.length === 0" class="alert alert-warning text-center">
-      No hay cursos disponibles.
-    </div>
-
-    <div v-else class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-      <div v-for="course in courses" :key="course.id" class="col">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title">{{ course.name || course.nombre }}</h5>
-            <p class="card-text">
-              <strong>Código:</strong> {{ course.code || course.codigo || 'N/A' }}<br />
-              <strong>Créditos:</strong> {{ course.credits || course.creditos || 'No definido' }}<br />
-              <strong>Año:</strong> {{ course.year || course.anio }}<br />
-              <strong>Bimestre:</strong> {{ course.bimester || course.bimestre }}<br />
-              <strong>Estado:</strong>
-              <span :class="course.status ? 'text-success' : 'text-danger'">
-                {{ course.status ? 'Activo' : 'Inactivo' }}
-              </span>
-            </p>
+    <!-- Lista de cursos -->
+    <div v-else>
+      <div v-if="courses.length > 0" class="row">
+        <div v-for="course in courses" :key="course.id" class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ course.name }}</h5>
+              <p class="card-text">Grado: {{ course.grade }}</p>
+              <p class="card-text">Descripción: {{ course.description }}</p>
+            </div>
           </div>
         </div>
+      </div>
+
+      <div v-else class="alert alert-info text-center">
+        No se encontraron cursos disponibles para ti.
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import axios from 'axios';
 
 export default {
   name: 'CoursesView',
-  computed: {
-    ...mapGetters(['courses', 'loading'])
+  data() {
+    return {
+      courses: [],
+      loading: false,
+    };
   },
-  created() {
-    this.fetchCourses()
+  mounted() {
+    this.fetchCourses();
   },
   methods: {
-    ...mapActions(['fetchCourses'])
+    async fetchCourses() {
+      this.loading = true;
+      try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get('https://cunaunsa.onrender.com/api/courses/', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        this.courses = response.data;
+      } catch (error) {
+        console.error('Error al obtener cursos:', error);
+        alert('No tienes autorización para ver los cursos.');
+      } finally {
+        this.loading = false;
+      }
+    }
   }
-}
+};
 </script>
 
 <style scoped>
-.card-title {
-  font-size: 1.25rem;
-  font-weight: bold;
+.card {
+  min-height: 180px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 </style>
