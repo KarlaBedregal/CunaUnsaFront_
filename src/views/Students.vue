@@ -43,6 +43,7 @@
 </template>
 
 <script>
+/* eslint-disable no-unused-vars */
 import api from '@/services/api'
 export default {
   name: 'StudentsView',
