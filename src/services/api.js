@@ -164,6 +164,9 @@ const api = {
   deleteStudent(id) {
     return apiInstance.delete(`/students/${id}/`);
   },
+  getAnnouncements() {
+    return apiInstance.get('/announcements/');
+  },
   getTeachers() {
     return apiInstance.get('/teachers/');
   },
