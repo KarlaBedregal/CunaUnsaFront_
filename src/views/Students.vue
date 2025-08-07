@@ -34,7 +34,7 @@
           <input v-model="form.full_name" type="text" class="form-control form-control-sm mb-1" />
           <input v-model="form.dni" type="text" class="form-control form-control-sm mb-1" />
           <input v-model="form.correo_electronico" type="email" class="form-control form-control-sm mb-1" />
-          <button class="btn btn-sm btn-success" @click="updateStudent(student.id)">Guardar</button>
+          <button class="btn btn-sm btn-success" @click="updateStudent(_student.id)">Guardar</button>
           <button class="btn btn-sm btn-secondary ms-2" @click="cancelEdit">Cancelar</button>
         </span>
       </li>
