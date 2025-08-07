@@ -56,29 +56,25 @@
         </div>
       </section>
 
-      <!-- FUNCIONALIDADES -->
-      <section id="funcionalidades" class="features-section mt-3">
-        <div class="container">
-          <div class="text-center mb-5">
-            <h2 class="section-heading text-uppercase">Funcionalidades del Sistema</h2>
-            <h3 class="section-subheading text-muted">Explora lo que puedes gestionar en Cuna UNSA</h3>
+      <!-- Sección de postulación -->
+    <section class="py-5 bg-light">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center">
+            <h2 class="mb-4">¿Quieres que tu hijo estudie con nosotros?</h2>
+            <p class="lead mb-4">Inicia el proceso de postulación completando nuestro formulario online</p>
+            <router-link to="/admission" class="btn btn-primary btn-lg">
+              📝 Postular Ahora
+            </router-link>
           </div>
-          <div class="row">
-            <div
-              class="col-md-4 mb-4"
-              v-for="(funcion, i) in funcionalidades"
-              :key="i"
-            >
-              <div class="card h-100 text-center text-white" @click="goToLogin" style="cursor: pointer;">
-                <div class="card-body">
-                  <h5 class="card-title">{{ funcion.titulo }}</h5>
-                  <p class="card-text">{{ funcion.descripcion }}</p>
-                </div>
-              </div>
-            </div>
+          <div class="col-md-6">
+                <router-link to="/check-admission" class="btn btn-outline-info btn-lg btn-block mb-3">
+                  🔍 Consultar Estado de Postulación
+                </router-link>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
       <!-- FOOTER -->
       <footer class="footer mt-4 py-3 text-center text-white">

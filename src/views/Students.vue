@@ -1,194 +1,126 @@
+<!-- eslint-disable no-unused-vars -->
 <template>
-  <div class="students-view">
-    <navbar-component />
-
-    <div class="container mt-4">
-      <div class="row">
-        <div class="col-12 d-flex justify-content-between align-items-center">
-          <h1>👨‍🎓 Gestión de Estudiantes</h1>
-          <button class="btn btn-primary" @click="toggleForm">
-            {{ showForm ? 'Cancelar' : '➕ Agregar Estudiante' }}
-          </button>
+  <div>
+    <h2>Estudiantes</h2>
+    <div v-if="canCreate" class="mb-3">
+      <h5>Nuevo estudiante</h5>
+      <form @submit.prevent="createStudent">
+      <!-- ...campos... -->
+        <div class="mb-2">
+          <label>Nombre completo:</label>
+          <input v-model="form.full_name" type="text" class="form-control" required />
         </div>
-      </div>
-
-      <div v-if="showForm" class="row mt-3">
-        <div class="col-12">
-          <div class="card border border-primary">
-            <div class="card-body">
-              <h5>{{ editingStudent ? 'Editar Estudiante' : 'Nuevo Estudiante' }}</h5>
-              <form @submit.prevent="submitForm">
-                <div class="row">
-                  <div class="col-md-4 mb-2">
-                    <input v-model="form.cui" type="text" class="form-control" placeholder="CUI" required>
-                  </div>
-                  <div class="col-md-4 mb-2">
-                    <input v-model="form.names" type="text" class="form-control" placeholder="Nombres" required>
-                  </div>
-                  <div class="col-md-4 mb-2">
-                    <select v-model="form.status" class="form-select">
-                      <option :value="true">Activo</option>
-                      <option :value="false">Inactivo</option>
-                    </select>
-                  </div>
-                </div>
-                <button type="submit" class="btn btn-success">
-                  {{ editingStudent ? 'Actualizar' : 'Guardar' }}
-                </button>
-              </form>
-            </div>
-          </div>
+        <div class="mb-2">
+          <label>Correo:</label>
+          <input v-model="form.correo_electronico" type="email" class="form-control" required />
         </div>
-      </div>
-
-      <div class="row mt-4">
-        <div class="col-12">
-          <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-              <h5>📋 Lista de Estudiantes</h5>
-              <button class="btn btn-secondary" @click="fetchStudents">
-                🔄 Actualizar
-              </button>
-            </div>
-            <div class="card-body">
-              <div v-if="loading" class="text-center">
-                <div class="spinner-border" role="status">
-                  <span class="visually-hidden">Cargando...</span>
-                </div>
-              </div>
-
-              <div v-else-if="error" class="alert alert-danger">
-                {{ error }}
-              </div>
-
-              <div v-else-if="students.length === 0" class="text-center">
-                <p>No hay estudiantes registrados</p>
-              </div>
-
-              <div v-else>
-                <div class="table-responsive">
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>CUI</th>
-                        <th>Nombre</th>
-                        <th>Estado</th>
-                        <th>Fecha Creación</th>
-                        <th>Acciones</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr v-for="student in students" :key="student.id">
-                        <td>{{ student.id }}</td>
-                        <td>{{ student.cui }}</td>
-                        <td>{{ student.names }}</td>
-                        <td>
-                          <span :class="student.status ? 'badge bg-success' : 'badge bg-danger'">
-                            {{ student.status ? 'Activo' : 'Inactivo' }}
-                          </span>
-                        </td>
-                        <td>{{ new Date(student.created).toLocaleDateString() }}</td>
-                        <td>
-                          <button class="btn btn-sm btn-warning me-2" @click="editStudent(student)">✏️</button>
-                          <button class="btn btn-sm btn-danger" @click="deleteStudent(student.id)">🗑️</button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
+        <button type="submit" class="btn btn-success">Crear</button>
+        <button type="button" @click="resetForm" class="btn btn-secondary ms-2">Cancelar</button>
+        <!-- ...campos... -->
+      </form>
     </div>
+    <ul>
+        <li v-for="_student in students" :key="_student.id">
+        <span v-if="editingId !== _student.id">
+          {{ _student.full_name }} - DNI: {{ _student.dni }}
+          <span v-if="canEdit(_student)" class="ms-2">
+            <button class="btn btn-sm btn-warning" @click="editStudent(_student)">Editar</button>
+          </span>
+          <span v-if="canDelete" class="ms-2">
+            <button class="btn btn-sm btn-danger" @click="deleteStudent(student.id)">Eliminar</button>
+          </span>
+        </span>
+        <span v-else>
+          <input v-model="form.full_name" type="text" class="form-control form-control-sm mb-1" />
+          <input v-model="form.dni" type="text" class="form-control form-control-sm mb-1" />
+          <input v-model="form.correo_electronico" type="email" class="form-control form-control-sm mb-1" />
+          <button class="btn btn-sm btn-success" @click="updateStudent(student.id)">Guardar</button>
+          <button class="btn btn-sm btn-secondary ms-2" @click="cancelEdit">Cancelar</button>
+        </span>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
-import NavbarComponent from '@/components/common/NavbarComponent.vue'
 import api from '@/services/api'
-
 export default {
   name: 'StudentsView',
-  components: {
-    NavbarComponent
-  },
   data() {
     return {
-      showForm: false,
-      editingStudent: null,
-      form: {
-        cui: '',
-        names: '',
-        status: true
-      }
+      students: [],
+      form: { full_name: '', dni: '', correo_electronico: '' },
+      editingId: null,
+      userType: localStorage.getItem('user_type') || '',
+      userId: localStorage.getItem('user_id') || ''
     }
   },
   computed: {
-    ...mapGetters(['students', 'loading', 'error'])
+    canCreate() {
+      return this.userType === 'admin'
+    },
+    canDelete() {
+      return this.userType === 'admin'
+    }
   },
   methods: {
-    ...mapActions(['fetchStudents']),
-
-    toggleForm() {
-      this.resetForm()
-      this.showForm = !this.showForm
-    },
-
-    resetForm() {
-      this.editingStudent = null
-      this.form = { cui: '', names: '', status: true }
-    },
-
-    async submitForm() {
+    async fetchStudents() {
       try {
-        if (this.editingStudent) {
-          await api.updateStudent(this.editingStudent.id, this.form)
-        } else {
-          await api.createStudent(this.form)
-        }
+        const res = await api.getStudents()
+        this.students = res.data.results || res.data.data || res.data
+      } catch (error) {
+        this.students = []
+      }
+    },
+    canEdit(student) {
+      // Padres/madres pueden editar sus hijos
+      return this.userType === 'father' || this.userType === 'mother'
+    },
+    editStudent(student) {
+      this.form = {
+        full_name: student.full_name,
+        dni: student.dni,
+        correo_electronico: student.correo_electronico
+      }
+      this.editingId = student.id
+    },
+    async updateStudent(id) {
+      try {
+        await api.updateStudent(id, this.form)
         this.fetchStudents()
-        this.showForm = false
+        this.cancelEdit()
+      } catch (error) {
+        alert('No tienes permisos para editar este estudiante.')
+      }
+    },
+    async createStudent() {
+      try {
+        await api.createStudent(this.form)
+        this.fetchStudents()
         this.resetForm()
       } catch (error) {
-        console.error('Error al guardar estudiante:', error)
-        alert('No se pudo guardar el estudiante')
+        alert('Error al crear estudiante.')
       }
     },
-
-    editStudent(student) {
-      this.showForm = true
-      this.editingStudent = student
-      this.form = {
-        cui: student.cui,
-        names: student.names,
-        status: student.status
-      }
-    },
-
     async deleteStudent(id) {
-      if (!confirm('¿Estás seguro de eliminar este estudiante?')) return
+      if (!confirm('¿Seguro que quieres eliminar este estudiante?')) return
       try {
         await api.deleteStudent(id)
         this.fetchStudents()
       } catch (error) {
-        console.error('Error al eliminar estudiante:', error)
+        alert('No tienes permisos para eliminar este estudiante.')
       }
+    },
+    resetForm() {
+      this.form = { full_name: '', dni: '', correo_electronico: '' }
+      this.editingId = null
+    },
+    cancelEdit() {
+      this.resetForm()
     }
   },
-  async created() {
-    await this.fetchStudents()
+  mounted() {
+    this.fetchStudents()
   }
 }
 </script>
-
-<style scoped>
-.table th,
-.table td {
-  vertical-align: middle;
-}
-</style>

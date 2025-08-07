@@ -6,7 +6,6 @@ export default createStore({
   state: {
     user: JSON.parse(localStorage.getItem('user')) || null,
     token: localStorage.getItem('token') || null,
-    isAuthenticated: !!localStorage.getItem('token'),
     students: [],
     teachers: [],
     courses: [],
@@ -17,11 +16,9 @@ export default createStore({
   mutations: {
     SET_USER(state, user) {
       state.user = user
-      state.isAuthenticated = !!user
     },
     SET_TOKEN(state, token) {
       state.token = token
-      state.isAuthenticated = !!token
     },
     SET_STUDENTS(state, students) {
       state.students = students
@@ -41,40 +38,54 @@ export default createStore({
     LOGOUT(state) {
       state.user = null
       state.token = null
-      state.isAuthenticated = false
+      localStorage.removeItem('token')
+      localStorage.removeItem('user')
     }
   },
 
   actions: {
     async login({ commit }, credentials) {
-      try {
-        commit('SET_LOADING', true)
-        const response = await api.login(credentials)
+    try {
+      commit('SET_LOADING', true);
+      const response = await api.login(credentials);
+      console.log("🔍 Login response:", response);
 
-        if (response.data.success) {
-          const { user, token } = response.data.data
+      const success = response?.data?.success;
+      const user = response?.data?.user_data;
+      const token = response?.data?.tokens?.access;
 
-          localStorage.setItem('token', token)
-          localStorage.setItem('user', JSON.stringify(user))
+      if (success && user && token) {
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
 
-          commit('SET_TOKEN', token)
-          commit('SET_USER', user)
-          commit('SET_ERROR', null)
+      commit('SET_TOKEN', token);
+      commit('SET_USER', user);
+      commit('SET_ERROR', null);
 
-          return response.data
-        }
-      } catch (error) {
-        commit('SET_ERROR', error.response?.data?.message || 'Error de login')
-        throw error
-      } finally {
-        commit('SET_LOADING', false)
-      }
-    },
-
-    async register({ commit }, userData) {
-      try {
-        commit('SET_LOADING', true)
-        const response = await api.register(userData)
+      return response.data;
+    } else if (success === false) {
+      // Solo lanzar error si success es false
+      const msg = response?.data?.message || 'Respuesta inesperada del servidor';
+      commit('SET_ERROR', msg);
+      throw new Error(msg);
+    } else {
+      // Si falta user o token, es error de datos
+      const msg = 'Datos de usuario o token faltantes';
+      commit('SET_ERROR', msg);
+      throw new Error(msg);
+    }
+    } catch (error) {
+      console.error('❌ Error en login:', error);
+      commit('SET_ERROR', error.response?.data?.message || 'Error de login');
+      throw error;
+    } finally {
+      commit('SET_LOADING', false);
+    }
+  },
+  async register({ commit }, userData) {
+    try {
+      commit('SET_LOADING', true)
+      const response = await api.register(userData)
 
         if (response.data.success) {
           const { user, token } = response.data.data
@@ -150,12 +161,12 @@ export default createStore({
   },
 
   getters: {
-    isAuthenticated: state => state.isAuthenticated,
-    currentUser: state => state.user,
-    students: state => state.students,
-    teachers: state => state.teachers,
-    courses: state => state.courses,
-    loading: state => state.loading,
-    error: state => state.error
-  }
+  isAuthenticated: state => !!state.token,
+  currentUser: state => state.user,
+  students: state => state.students,
+  teachers: state => state.teachers,
+  courses: state => state.courses,
+  loading: state => state.loading,
+  error: state => state.error
+  },
 })

@@ -1,4 +1,3 @@
-<!-- filepath: /home/karla/KARLITA/Cuna API unsa/cuna-frontend/src/views/LoginView.vue -->
 <template>
   <div class="login-container">
     <div class="container">
@@ -6,51 +5,37 @@
         <div class="col-md-6">
           <div class="card">
             <div class="card-header">
-              <h3 class="text-center">🎓 Iniciar Sesión - CUNA UNSA</h3>
+              <h3 class="text-center">🎓 Iniciar Sesión</h3>
             </div>
             <div class="card-body">
               <form @submit.prevent="handleLogin">
-                <div class="mb-3">
-                  <label for="username" class="form-label">Usuario</label>
+                <div class="form-group">
+                  <label for="username">Usuario (DNI)</label>
                   <input
                     type="text"
-                    class="form-control"
                     id="username"
                     v-model="form.username"
+                    class="form-control"
                     required
                   />
                 </div>
-                
-                <div class="mb-3">
-                  <label for="password" class="form-label">Contraseña</label>
+                <div class="form-group">
+                  <label for="password">Contraseña</label>
                   <input
                     type="password"
-                    class="form-control"
                     id="password"
                     v-model="form.password"
+                    class="form-control"
                     required
                   />
                 </div>
-                
-                <div class="d-grid">
-                  <button
-                    type="submit"
-                    class="btn btn-primary"
-                    :disabled="loading"
-                  >
-                    <span v-if="loading" class="spinner-border spinner-border-sm me-2"></span>
-                    {{ loading ? 'Iniciando...' : 'Iniciar Sesión' }}
-                  </button>
+                <div class="text-center mt-3">
+                  <button type="submit" class="btn btn-primary">Ingresar</button>
                 </div>
               </form>
-              
-              <div v-if="error" class="alert alert-danger mt-3">
-                {{ error }}
-              </div>
-              
-              <div class="text-center mt-3">
-                <p>¿No tienes cuenta? <router-link to="/register">Regístrate aquí</router-link></p>
-              </div>
+              <p v-if="errorMessage" class="text-danger text-center mt-2">
+                {{ errorMessage }}
+              </p>
             </div>
           </div>
         </div>
@@ -60,7 +45,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'LoginView',
@@ -69,23 +54,24 @@ export default {
       form: {
         username: '',
         password: ''
-      }
+      },
+      errorMessage: ''
     }
   },
-  
-  computed: {
-    ...mapGetters(['loading', 'error'])
-  },
-  
   methods: {
     ...mapActions(['login']),
-    
     async handleLogin() {
       try {
-        await this.login(this.form)
-        this.$router.push('/dashboard')
+        const res = await this.login(this.form)
+        // Si el login fue exitoso, redirige al dashboard
+        if (res && res.success) {
+          this.$router.push('/dashboard')
+        } else {
+          this.errorMessage = 'Credenciales inválidas.'
+        }
       } catch (error) {
-        console.error('Error en login:', error)
+        this.errorMessage = 'Error al iniciar sesión.'
+        console.error(error)
       }
     }
   }
@@ -94,21 +80,6 @@ export default {
 
 <style scoped>
 .login-container {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.card {
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.card-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border-radius: 15px 15px 0 0;
+  margin-top: 80px;
 }
 </style>
