@@ -27,7 +27,7 @@
             <button class="btn btn-sm btn-warning" @click="editStudent(_student)">Editar</button>
           </span>
           <span v-if="canDelete" class="ms-2">
-            <button class="btn btn-sm btn-danger" @click="deleteStudent(student.id)">Eliminar</button>
+            <button class="btn btn-sm btn-danger" @click="deleteStudent(_student.id)">Eliminar</button>
           </span>
         </span>
         <span v-else>

@@ -58,6 +58,7 @@ apiInstance.get('/api/health/')
   .catch(err => console.error(err));
 // ✅ Exportar las funciones de API como objeto agrupado
 const api = {
+<<<<<<< HEAD
   getAdmissions() {
     return apiInstance.get('/api/admissions/');
   },
@@ -76,6 +77,8 @@ const api = {
     return apiInstance.get(`/api/check-admission/?dni=${studentDni}`);
   },
 
+=======
+>>>>>>> ad79da84c231c059b96296049e51f6b54c92011e
   // --- Autenticación ---
   login(credentials) {
     // Obtener el CSRF token de las cookies

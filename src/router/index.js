@@ -4,9 +4,13 @@ import store from '@/store'
 const routes = [
   { path: '/', name: 'Home', component: () => import('@/views/Home.vue') },
   { path: '/about-us', name: 'AboutUs', component: () => import('@/views/about-us.vue') },
+<<<<<<< HEAD
   { path: '/admission', name: 'Admission', component: () => import('@/views/Admission.vue') },
   { path: '/login', name: 'Login', component: () => import('@/views/Login.vue'), meta: { requiresGuest: true } },
   { path: '/check-admission', name: 'CheckAdmission', component: () => import('@/views/CheckAdmission.vue') },
+=======
+  { path: '/login', name: 'Login', component: () => import('@/views/Login.vue'), meta: { requiresGuest: true } },
+>>>>>>> ad79da84c231c059b96296049e51f6b54c92011e
 
   // Dashboard principal
   { path: '/dashboard', name: 'Dashboard', component: () => import('@/views/Dashboard.vue'), meta: { requiresAuth: true } },
