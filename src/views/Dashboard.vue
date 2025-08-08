@@ -26,28 +26,30 @@
         <div class="status-indicator">
           <span class="status-badge online">🟢 En línea</span>
         </div>
-        <div class="user-dropdown">
+        <div class="user-dropdown" @click.stop>
           <button class="user-btn" @click="toggleUserMenu">
             <i class="fas fa-user-circle"></i>
             <span>{{ getUserDisplayName() }}</span>
-            <i class="fas fa-chevron-down"></i>
+            <i :class="['fas', showUserMenu ? 'fa-chevron-up' : 'fa-chevron-down']"></i>
           </button>
-          <!-- ✅ DROPDOWN MENU CORREGIDO -->
-          <div v-if="showUserMenu" class="dropdown-menu">
-            <router-link to="/profile" class="dropdown-item" @click="closeUserMenu">
-              <i class="fas fa-user"></i> Mi Perfil
-            </router-link>
-            <router-link to="/grades" class="dropdown-item" @click="closeUserMenu">
-              <i class="fas fa-star"></i> Calificaciones
-            </router-link>
-            <router-link to="/calendar" class="dropdown-item" @click="closeUserMenu">
-              <i class="fas fa-calendar"></i> Calendario
-            </router-link>
-            <hr class="dropdown-divider">
-            <a href="#" class="dropdown-item" @click="handleLogout">
-              <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
-            </a>
-          </div>
+          <!-- ✅ DROPDOWN MENU -->
+          <transition name="dropdown">
+            <div v-if="showUserMenu" class="dropdown-menu" @click.stop>
+              <router-link to="/profile" class="dropdown-item" @click="closeUserMenu">
+                <i class="fas fa-user"></i> Mi Perfil
+              </router-link>
+              <router-link to="/grades" class="dropdown-item" @click="closeUserMenu">
+                <i class="fas fa-star"></i> Calificaciones
+              </router-link>
+              <router-link to="/calendar" class="dropdown-item" @click="closeUserMenu">
+                <i class="fas fa-calendar"></i> Calendario
+              </router-link>
+              <hr class="dropdown-divider">
+              <button class="dropdown-item" @click="handleLogout">
+                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+              </button>
+            </div>
+          </transition>
         </div>
       </div>
     </nav>
@@ -179,30 +181,70 @@
             </h2>
             <p class="text-muted">Conversaciones con docentes y personal</p>
           </div>
-          
+          <!-- ✅ BOTÓN PARA INICIAR CHAT -->
+          <div class="mb-4">
+            <button 
+              v-if="!showChatForm" 
+              class="btn btn-primary btn-lg"
+              @click="showChatForm = true"
+            >
+              <i class="fas fa-plus"></i> Iniciar Nuevo Chat
+            </button>
+          </div>
+
           <!-- Formulario para enviar mensajes -->
-          <div v-if="canSendMessages" class="mb-4 chat-form">
+          <div v-if="showChatForm && canSendMessages" class="mb-4 chat-form">
             <div class="card">
-              <div class="card-header">
+              <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">
                   <i class="fas fa-paper-plane"></i>
                   Enviar nuevo mensaje
                 </h5>
+                <button class="btn btn-sm btn-outline-secondary" @click="showChatForm = false">
+                  <i class="fas fa-times"></i>
+                </button>
               </div>
               <div class="card-body">
                 <form @submit.prevent="sendMessage">
+                  <!-- ✅ SELECTOR DE WORKLOAD/CURSO -->
                   <div class="mb-3">
-                    <label class="form-label">Workload ID:</label>
-                    <input v-model="chatForm.workload" type="number" class="form-control" required />
-                    <div class="form-text">Ingresa el ID del workload del curso</div>
+                    <label class="form-label">Seleccionar Curso:</label>
+                    <select v-model="chatForm.workload" class="form-control" required>
+                      <option value="">-- Selecciona un curso --</option>
+                      <option v-for="course in userCourses" :key="course.id" :value="course.id">
+                        {{ course.name || course.nombre }} - {{ course.grade || course.nivel }}
+                      </option>
+                    </select>
+                    <div class="form-text">Selecciona el curso relacionado con tu mensaje</div>
                   </div>
+                  
+                  <!-- ✅ SELECTOR DE DESTINATARIO -->
+                  <div class="mb-3" v-if="chatForm.workload">
+                    <label class="form-label">Enviar a:</label>
+                    <select v-model="chatForm.recipient" class="form-control">
+                      <option value="">-- Mensaje general del curso --</option>
+                      <option v-for="teacher in availableTeachers" :key="teacher.id" :value="teacher.id">
+                        👨‍🏫 {{ teacher.first_name }} {{ teacher.last_name }} (Docente)
+                      </option>
+                      <option v-for="parent in availableParents" :key="parent.id" :value="parent.id">
+                        👨‍👩‍👧‍👦 {{ parent.first_name }} {{ parent.last_name }} (Padre/Madre)
+                      </option>
+                    </select>
+                  </div>
+
                   <div class="mb-3">
                     <label class="form-label">Mensaje:</label>
-                    <textarea v-model="chatForm.message" class="form-control" rows="3" required placeholder="Escribe tu mensaje aquí..."></textarea>
+                    <textarea 
+                      v-model="chatForm.message" 
+                      class="form-control" 
+                      rows="4" 
+                      required 
+                      placeholder="Escribe tu mensaje aquí..."
+                    ></textarea>
                   </div>
                   <div class="d-flex gap-2">
                     <button type="submit" class="btn btn-primary" :disabled="!chatForm.workload || !chatForm.message">
-                      <i class="fas fa-send"></i> Enviar
+                      <i class="fas fa-send"></i> Enviar Mensaje
                     </button>
                     <button type="button" @click="resetChatForm" class="btn btn-secondary">
                       <i class="fas fa-times"></i> Cancelar
@@ -213,13 +255,21 @@
             </div>
           </div>
 
-
-          <!-- Lista de chats -->
+          <!-- Lista de chats existentes -->
           <div v-if="userChats && userChats.length > 0">
+            <h4 class="mb-3">
+              <i class="fas fa-history"></i>
+              Conversaciones Recientes
+            </h4>
             <div class="chat-list">
               <div v-for="chat in userChats" :key="chat.id" class="chat-item">
                 <div class="chat-header">
-                  <strong>{{ chat.workload?.name || `Workload ${chat.workload}` }}</strong>
+                  <div class="chat-info">
+                    <strong>{{ chat.workload?.name || `Curso ${chat.workload}` }}</strong>
+                    <span class="chat-sender">
+                      por {{ chat.sender?.first_name || 'Usuario' }}
+                    </span>
+                  </div>
                   <span class="chat-time">
                     {{ formatDate(chat.created_at) }}
                   </span>
@@ -230,17 +280,17 @@
               </div>
             </div>
           </div>
-          <div v-else class="empty-state">
+          
+          <div v-else-if="!showChatForm" class="empty-state">
             <div class="empty-icon">
               <i class="fas fa-comments"></i>
             </div>
-            <h3>No hay mensajes</h3>
-            <p>Aún no tienes conversaciones</p>
+            <h3>No hay conversaciones</h3>
+            <p>Inicia tu primera conversación haciendo clic en "Iniciar Nuevo Chat"</p>
           </div>
         </div>
 
-        <!-- Payments View - Integrado con Payments.vue -->
-        <div v-else-if="currentView === 'payments'" class="payments-content">
+      <div v-else-if="currentView === 'payments'" class="payments-content">
           <div class="content-header">
             <h2>
               <i class="fas fa-credit-card"></i>
@@ -248,6 +298,67 @@
             </h2>
             <p class="text-muted">Estado de pagos y facturas</p>
           </div>
+          <!-- ✅ FORMULARIO PARA REGISTRAR PAGO (para padres) -->
+          <div v-if="canRegisterPayments" class="mb-4 payment-form">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="mb-0">
+                  <i class="fas fa-plus"></i>
+                  Registrar Pago Realizado
+                </h5>
+              </div>
+              <div class="card-body">
+                <form @submit.prevent="registerPayment">
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Concepto:</label>
+                      <select v-model="paymentForm.concept" class="form-control" required>
+                        <option value="">-- Selecciona el concepto --</option>
+                        <option value="mensualidad">Mensualidad</option>
+                        <option value="matricula">Matrícula</option>
+                        <option value="materiales">Materiales</option>
+                        <option value="excursion">Excursión</option>
+                        <option value="uniforme">Uniforme</option>
+                        <option value="otros">Otros</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Monto (S/.):</label>
+                      <input v-model="paymentForm.amount" type="number" step="0.01" class="form-control" required />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Número de Recibo/Operación:</label>
+                      <input v-model="paymentForm.receipt_number" type="text" class="form-control" required />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Fecha de Pago:</label>
+                      <input v-model="paymentForm.payment_date" type="date" class="form-control" required />
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Descripción adicional (opcional):</label>
+                    <textarea v-model="paymentForm.description" class="form-control" rows="2"></textarea>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Voucher/Comprobante:</label>
+                    <input type="file" @change="handleVoucherUpload" class="form-control" accept="image/*,.pdf" required />
+                    <div class="form-text">Sube una foto o PDF del comprobante de pago</div>
+                  </div>
+                  <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-success">
+                      <i class="fas fa-check"></i> Registrar Pago
+                    </button>
+                    <button type="button" @click="resetPaymentForm" class="btn btn-secondary">
+                      <i class="fas fa-times"></i> Cancelar
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          
           
           <div v-if="loadingPayments" class="text-center">
             <div class="spinner-border text-primary" role="status">
@@ -256,19 +367,41 @@
             <p class="mt-2">Cargando información de pagos...</p>
           </div>
           
+          <!-- ✅ LISTA MEJORADA DE PAGOS -->
           <div v-else-if="userPayments.length > 0">
-            <div class="payments-list">
+            <h4 class="mb-3">
+              <i class="fas fa-list"></i>
+              Historial de Pagos
+            </h4>
+                  
+        <div class="payments-list">
               <div v-for="payment in userPayments" :key="payment.id" class="payment-card">
                 <div class="payment-header">
-                  <h5>{{ payment.description || 'Pago' }}</h5>
+                  <div class="payment-info">
+                    <h5>{{ payment.concept || payment.description || 'Pago' }}</h5>
+                    <p class="text-muted mb-1">Recibo: {{ payment.receipt_number || 'N/A' }}</p>
+                  </div>
                   <span :class="['payment-status', getPaymentStatusClass(payment.status)]">
-                    {{ payment.status || 'Pendiente' }}
+                    <i :class="getPaymentStatusIcon(payment.status)"></i>
+                    {{ getPaymentStatusText(payment.status) }}
                   </span>
                 </div>
                 <div class="payment-details">
-                  <p><strong>Monto:</strong> S/. {{ payment.amount }}</p>
-                  <p><strong>Fecha:</strong> {{ formatDate(payment.date) }}</p>
-                  <p v-if="payment.student"><strong>Estudiante:</strong> {{ payment.student.full_name }}</p>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <p><strong>Monto:</strong> S/. {{ payment.amount }}</p>
+                      <p><strong>Fecha:</strong> {{ formatDate(payment.payment_date || payment.date) }}</p>
+                    </div>
+                    <div class="col-md-6">
+                      <p v-if="payment.student_name"><strong>Estudiante:</strong> {{ payment.student_name }}</p>
+                      <p v-if="payment.voucher">
+                        <strong>Comprobante:</strong> 
+                        <a :href="payment.voucher" target="_blank" class="btn btn-sm btn-outline-primary ms-2">
+                          <i class="fas fa-eye"></i> Ver
+                        </a>
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -282,17 +415,17 @@
           </div>
         </div>
 
-        <!-- Documents View - Integrado con Documents.vue -->
-        <div v-else-if="currentView === 'documents'" class="documents-content">
-          <div class="content-header">
-            <h2>
-              <i class="fas fa-file-alt"></i>
-              Mis Documentos
-            </h2>
-            <p class="text-muted">Documentos y archivos importantes</p>
-          </div>
+      <!-- Documents View - Integrado con Documents.vue -->
+      <div v-else-if="currentView === 'documents'" class="documents-content">
+        <div class="content-header">
+          <h2>
+            <i class="fas fa-file-alt"></i>
+            Mis Documentos
+          </h2>
+          <p class="text-muted">Documentos y archivos importantes</p>
+        </div>
 
-          <!-- Formulario para subir documentos (solo teachers) -->
+          <!-- ✅ FORMULARIO MEJORADO PARA SUBIR DOCUMENTOS -->
           <div v-if="canUploadDocuments" class="mb-4 document-form">
             <div class="card">
               <div class="card-header">
@@ -303,25 +436,46 @@
               </div>
               <div class="card-body">
                 <form @submit.prevent="uploadDocument" enctype="multipart/form-data">
-                  <div class="mb-3">
-                    <label class="form-label">Título:</label>
-                    <input v-model="documentForm.title" type="text" class="form-control" required />
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Título del documento:</label>
+                      <input v-model="documentForm.title" type="text" class="form-control" required />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Categoría:</label>
+                      <select v-model="documentForm.category" class="form-control" required>
+                        <option value="">-- Selecciona una categoría --</option>
+                        <option v-if="userType === 'teacher'" value="material_clase">Material de Clase</option>
+                        <option v-if="userType === 'teacher'" value="evaluacion">Evaluación</option>
+                        <option v-if="userType === 'teacher'" value="proyecto">Proyecto</option>
+                        <option v-if="['father', 'mother'].includes(userType)" value="justificacion">Justificación</option>
+                        <option v-if="['father', 'mother'].includes(userType)" value="permiso">Permiso</option>
+                        <option v-if="['father', 'mother'].includes(userType)" value="documento_medico">Documento Médico</option>
+                        <option value="otros">Otros</option>
+                      </select>
+                    </div>
                   </div>
                   <div class="mb-3">
-                    <label class="form-label">Descripción:</label>
-                    <textarea v-model="documentForm.description" class="form-control" rows="3" required></textarea>
+                    <label class="form-label">Descripción (opcional):</label>
+                    <textarea v-model="documentForm.description" class="form-control" rows="3" placeholder="Describe brevemente el contenido del documento"></textarea>
                   </div>
-                  <div class="mb-3">
+                  <div class="mb-3" v-if="userType === 'teacher'">
                     <label class="form-label">Workload ID:</label>
-                    <input v-model="documentForm.workload" type="number" class="form-control" required />
+                    <select v-model="documentForm.workload" class="form-control">
+                      <option value="">-- Documento general --</option>
+                      <option v-for="course in userCourses" :key="course.id" :value="course.id">
+                        {{ course.name || course.nombre }} - {{ course.grade || course.nivel }}
+                      </option>
+                    </select>
                   </div>
                   <div class="mb-3">
                     <label class="form-label">Archivo:</label>
                     <input type="file" @change="handleFileUpload" class="form-control" required />
+                    <div class="form-text">Formatos permitidos: PDF, DOC, DOCX, JPG, PNG (máx. 10MB)</div>
                   </div>
                   <div class="d-flex gap-2">
                     <button type="submit" class="btn btn-success">
-                      <i class="fas fa-upload"></i> Subir
+                      <i class="fas fa-upload"></i> Subir Documento
                     </button>
                     <button type="button" @click="resetDocumentForm" class="btn btn-secondary">
                       <i class="fas fa-times"></i> Cancelar
@@ -341,18 +495,27 @@
           </div>
           
           <div v-else-if="userDocuments.length > 0">
+            <h4 class="mb-3">
+              <i class="fas fa-folder"></i>
+              Mis Documentos
+            </h4>
             <div class="documents-list">
               <div v-for="doc in userDocuments" :key="doc.id" class="document-card">
                 <div class="document-icon">
-                  <i class="fas fa-file-pdf"></i>
+                  <i :class="getDocumentIcon(doc.file)"></i>
                 </div>
                 <div class="document-info">
                   <h5>{{ doc.title }}</h5>
-                  <p>{{ doc.description }}</p>
+                  <p v-if="doc.description">{{ doc.description }}</p>
                   <div class="document-meta">
+                    <span class="badge bg-secondary me-2">{{ doc.category || 'General' }}</span>
                     <span class="text-muted">
                       <i class="fas fa-calendar"></i>
                       {{ formatDate(doc.created_at) }}
+                    </span>
+                    <span class="text-muted ms-2">
+                      <i class="fas fa-user"></i>
+                      {{ doc.uploaded_by?.first_name || 'Usuario' }}
                     </span>
                   </div>
                 </div>
@@ -372,13 +535,15 @@
               <i class="fas fa-file-alt"></i>
             </div>
             <h3>No hay documentos</h3>
-            <p>No se encontraron documentos para mostrar</p>
+            <p>{{ canUploadDocuments ? 'Sube tu primer documento usando el formulario de arriba' : 'No se encontraron documentos para mostrar' }}</p>
           </div>
         </div>
       </main>
     </div>
   </div>
 </template>
+
+        
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
@@ -390,12 +555,15 @@ export default {
     return {
       currentView: 'home',
       showUserMenu: false,
+      showChatForm: false,
       
       // Datos reales de la API
       userCourses: [],
       userChats: [],
       userPayments: [],
       userDocuments: [],
+      availableTeachers: [],
+      availableParents: [],
       
       // Estados de carga
       loadingCourses: false,
@@ -403,8 +571,26 @@ export default {
       loadingDocuments: false,
       
       // Formularios
-      chatForm: { workload: '', message: '' },
-      documentForm: { title: '', description: '', workload: '', file: null },
+      chatForm: { 
+        workload: '', 
+        message: '', 
+        recipient: '' 
+      },
+      documentForm: { 
+        title: '', 
+        description: '', 
+        workload: '', 
+        category: '',
+        file: null 
+      },
+      paymentForm: {
+        concept: '',
+        amount: '',
+        receipt_number: '',
+        payment_date: '',
+        description: '',
+        voucher: null
+      },
       
       // Tipo de usuario
       userType: localStorage.getItem('user_type') || ''
@@ -418,7 +604,11 @@ export default {
     },
     
     canUploadDocuments() {
-      return this.userType === 'teacher'
+      return ['teacher', 'father', 'mother'].includes(this.userType)
+    },
+    
+    canRegisterPayments() {
+      return ['father', 'mother'].includes(this.userType)
     }
   },
   methods: {
@@ -427,6 +617,7 @@ export default {
     setCurrentView(view) {
       this.currentView = view
       this.showUserMenu = false
+      this.showChatForm = false
       
       // Cargar datos según la vista
       switch(view) {
@@ -447,15 +638,14 @@ export default {
     
     toggleUserMenu() {
       this.showUserMenu = !this.showUserMenu
+      console.log('👤 Toggle user menu:', this.showUserMenu)
     },
     closeUserMenu() {
       this.showUserMenu = false
     },
     getUserDisplayName() {
       if (!this.currentUser) return 'Usuario'
-      
-      console.log('👤 Current user:', this.currentUser)
-      
+            
       // Si tiene first_name, usar solo eso
       if (this.currentUser.first_name) {
         return this.currentUser.first_name
@@ -487,6 +677,118 @@ export default {
       }
     },
     
+    // ✅ MÉTODOS MEJORADOS
+    async sendMessage() {
+      try {
+        console.log('📤 Enviando mensaje:', this.chatForm)
+        await api.createChat(this.chatForm)
+        console.log('✅ Mensaje enviado')
+        await this.loadUserChats()
+        this.resetChatForm()
+        this.showChatForm = false
+        alert('Mensaje enviado correctamente')
+      } catch (error) {
+        console.error('❌ Error enviando mensaje:', error)
+        alert('Error al enviar mensaje: ' + (error.response?.data?.message || error.message))
+      }
+    },
+    async registerPayment() {
+      try {
+        const formData = new FormData()
+        formData.append('concept', this.paymentForm.concept)
+        formData.append('amount', this.paymentForm.amount)
+        formData.append('receipt_number', this.paymentForm.receipt_number)
+        formData.append('payment_date', this.paymentForm.payment_date)
+        formData.append('description', this.paymentForm.description)
+        formData.append('voucher', this.paymentForm.voucher)
+        
+        await api.createPayment(formData)
+        await this.loadUserPayments()
+        this.resetPaymentForm()
+        alert('Pago registrado correctamente. Será verificado por el administrador.')
+      } catch (error) {
+        console.error('Error registrando pago:', error)
+        alert('Error al registrar pago: ' + (error.response?.data?.message || error.message))
+      }
+    },
+    // ✅ MÉTODOS AUXILIARES MEJORADOS
+    getPaymentStatusText(status) {
+      switch (status?.toLowerCase()) {
+        case 'pagado':
+        case 'paid':
+        case 'verificado':
+          return 'Pagado'
+        case 'pendiente':
+        case 'pending':
+          return 'Pendiente'
+        case 'verificando':
+          return 'En Verificación'
+        case 'rechazado':
+          return 'Rechazado'
+        default:
+          return 'Pendiente'
+      }
+    },
+
+    getPaymentStatusIcon(status) {
+      switch (status?.toLowerCase()) {
+        case 'pagado':
+        case 'paid':
+        case 'verificado':
+          return 'fas fa-check-circle'
+        case 'pendiente':
+        case 'pending':
+          return 'fas fa-clock'
+        case 'verificando':
+          return 'fas fa-hourglass-half'
+        case 'rechazado':
+          return 'fas fa-times-circle'
+        default:
+          return 'fas fa-clock'
+      }
+    },
+    getDocumentIcon(filename) {
+      if (!filename) return 'fas fa-file'
+      const ext = filename.split('.').pop().toLowerCase()
+      switch (ext) {
+        case 'pdf': return 'fas fa-file-pdf'
+        case 'doc':
+        case 'docx': return 'fas fa-file-word'
+        case 'jpg':
+        case 'jpeg':
+        case 'png': return 'fas fa-file-image'
+        default: return 'fas fa-file'
+      }
+    },
+    
+    resetChatForm() {
+      this.chatForm = { workload: '', message: '', recipient: '' }
+    },
+    
+    resetPaymentForm() {
+      this.paymentForm = {
+        concept: '',
+        amount: '',
+        receipt_number: '',
+        payment_date: '',
+        description: '',
+        voucher: null
+      }
+    },
+    resetDocumentForm() {
+      this.documentForm = { 
+        title: '', 
+        description: '', 
+        workload: '', 
+        category: '',
+        file: null 
+      }
+    },
+    
+    handleVoucherUpload(event) {
+      this.paymentForm.voucher = event.target.files[0]
+    },
+
     // Métodos para cargar datos
     async loadUserCourses() {
       this.loadingCourses = true
@@ -681,7 +983,7 @@ export default {
   },
   
   mounted() {
-    // Cerrar menú al hacer click fuera
+    // Cerrar menú al hacer click fuera - MEJORADO
     document.addEventListener('click', (e) => {
       if (!e.target.closest('.user-dropdown')) {
         this.showUserMenu = false
@@ -696,18 +998,37 @@ export default {
   position: relative;
 }
 
+.user-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.user-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
 .dropdown-menu {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 0.5rem);
   right: 0;
   background: white;
   border-radius: 8px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-  min-width: 200px;
-  margin-top: 0.5rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  min-width: 220px;
   border: 1px solid #e9ecef;
-  z-index: 1050; /* ✅ Z-index alto para que aparezca encima */
+  z-index: 9999; /* ✅ Z-index muy alto */
+  overflow: hidden;
 }
+
 .dropdown-item {
   display: flex;
   align-items: center;
@@ -721,6 +1042,7 @@ export default {
   background: none;
   width: 100%;
   text-align: left;
+  font-size: 0.9rem;
 }
 
 .dropdown-item:hover {
@@ -728,6 +1050,7 @@ export default {
   color: #dc3545;
   text-decoration: none;
 }
+
 .dropdown-divider {
   margin: 0.5rem 0;
   border-color: #e9ecef;
@@ -736,6 +1059,75 @@ export default {
 .dashboard-view {
   min-height: 100vh;
   background: #f8f9fa;
+}
+
+/* ✅ ANIMACIÓN DEL DROPDOWN */
+.dropdown-enter-active, .dropdown-leave-active {
+  transition: all 0.3s ease;
+}
+
+.dropdown-enter-from, .dropdown-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.chat-sender {
+  color: #6c757d;
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
+}
+
+.chat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ✅ ESTILOS PARA PAGOS MEJORADOS */
+.payment-info h5 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+
+.payment-status {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.status-paid {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-verificando {
+  background: #cce5ff;
+  color: #004085;
+}
+.status-rechazado {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* ✅ MEJORAS GENERALES */
+.payment-form .card,
+.chat-form .card,
+.document-form .card {
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.btn-lg {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
 }
 
 /* Top Navigation */
