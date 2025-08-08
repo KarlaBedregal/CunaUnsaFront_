@@ -122,6 +122,48 @@ const api = {
       headers: { 'Content-Type': 'multipart/form-data' }
     });
   },
+  getCourses() {
+    return apiInstance.get('/courses/');
+  },
+  createCourse(data) {
+    return apiInstance.post('/courses/', data);
+  },
+  updateCourse(id, data) {
+    return apiInstance.put(`/courses/${id}/`, data);
+  },
+  deleteCourse(id) {
+    return apiInstance.delete(`/courses/${id}/`);
+  },
+
+  getGrades() {
+    return apiInstance.get('/grades/');
+  },
+  createGrade(data) {
+    return apiInstance.post('/grades/', data);
+  },
+  updateGrade(id, data) {
+    return apiInstance.put(`/grades/${id}/`, data);
+  },
+  deleteGrade(id) {
+    return apiInstance.delete(`/grades/${id}/`);
+  },
+
+  createAnnouncement(data) {
+    return apiInstance.post('/announcements/', data);
+  },
+  updateAnnouncement(id, data) {
+    return apiInstance.put(`/announcements/${id}/`, data);
+  },
+  deleteAnnouncement(id) {
+    return apiInstance.delete(`/announcements/${id}/`);
+  },
+
+  updateDocument(id, data) {
+    return apiInstance.put(`/documents/${id}/`, data);
+  },
+  deleteDocument(id) {
+    return apiInstance.delete(`/documents/${id}/`);
+  },
   getInscriptions() {
     return apiInstance.get('/inscriptions/');
   },

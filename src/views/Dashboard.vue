@@ -32,14 +32,15 @@
             <span>{{ getUserDisplayName() }}</span>
             <i class="fas fa-chevron-down"></i>
           </button>
-          <div v-show="showUserMenu" class="dropdown-menu">
-            <router-link to="/profile" class="dropdown-item" @click="showUserMenu = false">
+          <!-- ✅ DROPDOWN MENU CORREGIDO -->
+          <div v-if="showUserMenu" class="dropdown-menu">
+            <router-link to="/profile" class="dropdown-item" @click="closeUserMenu">
               <i class="fas fa-user"></i> Mi Perfil
             </router-link>
-            <router-link to="/grades" class="dropdown-item" @click="showUserMenu = false">
+            <router-link to="/grades" class="dropdown-item" @click="closeUserMenu">
               <i class="fas fa-star"></i> Calificaciones
             </router-link>
-            <router-link to="/calendar" class="dropdown-item" @click="showUserMenu = false">
+            <router-link to="/calendar" class="dropdown-item" @click="closeUserMenu">
               <i class="fas fa-calendar"></i> Calendario
             </router-link>
             <hr class="dropdown-divider">
@@ -104,37 +105,6 @@
               </div>
             </div>
           </div>
-
-          <!-- Statistics Section -->
-          <div class="stats-section">
-            <h4 class="text-center mb-4">📊 Estadísticas del Sistema</h4>
-            <div class="row">
-              <div class="col-md-3 mb-3">
-                <div class="stat-card primary">
-                  <div class="stat-number">{{ students?.length || 0 }}</div>
-                  <div class="stat-label">👨‍🎓 Estudiantes Activos</div>
-                </div>
-              </div>
-              <div class="col-md-3 mb-3">
-                <div class="stat-card success">
-                  <div class="stat-number">{{ teachers?.length || 0 }}</div>
-                  <div class="stat-label">👨‍🏫 Docentes</div>
-                </div>
-              </div>
-              <div class="col-md-3 mb-3">
-                <div class="stat-card info">
-                  <div class="stat-number">{{ courses?.length || 0 }}</div>
-                  <div class="stat-label">📚 Cursos Disponibles</div>
-                </div>
-              </div>
-              <div class="col-md-3 mb-3">
-                <div class="stat-card warning">
-                  <div class="stat-number">{{ loading ? '...' : '98%' }}</div>
-                  <div class="stat-label">⚡ Uptime del Sistema</div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
 
         <!-- Courses View - Integrado con Courses.vue -->
@@ -154,7 +124,7 @@
             <p class="mt-2">Cargando cursos...</p>
           </div>
           
-          <div v-else-if="userCourses.length > 0" class="courses-grid">
+          <div v-else-if="userCourses && userCourses.length > 0" class="courses-grid">
             <div 
               v-for="course in userCourses" 
               :key="course.id"
@@ -165,7 +135,8 @@
                 <div class="course-icon">
                   <i class="fas fa-graduation-cap"></i>
                 </div>
-                <h4>{{ course.name || course.nombre }}</h4>
+                <!-- ✅ USAR LOS NOMBRES CORRECTOS DE TU BACKEND -->
+                <h4>{{ course.name || course.nombre || 'Sin nombre' }}</h4>
               </div>
               <div class="course-info">
                 <p class="course-description">{{ course.description || course.descripcion || 'Sin descripción' }}</p>
@@ -223,13 +194,14 @@
                   <div class="mb-3">
                     <label class="form-label">Workload ID:</label>
                     <input v-model="chatForm.workload" type="number" class="form-control" required />
+                    <div class="form-text">Ingresa el ID del workload del curso</div>
                   </div>
                   <div class="mb-3">
                     <label class="form-label">Mensaje:</label>
-                    <textarea v-model="chatForm.message" class="form-control" rows="3" required></textarea>
+                    <textarea v-model="chatForm.message" class="form-control" rows="3" required placeholder="Escribe tu mensaje aquí..."></textarea>
                   </div>
                   <div class="d-flex gap-2">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary" :disabled="!chatForm.workload || !chatForm.message">
                       <i class="fas fa-send"></i> Enviar
                     </button>
                     <button type="button" @click="resetChatForm" class="btn btn-secondary">
@@ -241,8 +213,9 @@
             </div>
           </div>
 
+
           <!-- Lista de chats -->
-          <div v-if="userChats.length > 0">
+          <div v-if="userChats && userChats.length > 0">
             <div class="chat-list">
               <div v-for="chat in userChats" :key="chat.id" class="chat-item">
                 <div class="chat-header">
@@ -475,19 +448,27 @@ export default {
     toggleUserMenu() {
       this.showUserMenu = !this.showUserMenu
     },
-    
+    closeUserMenu() {
+      this.showUserMenu = false
+    },
     getUserDisplayName() {
       if (!this.currentUser) return 'Usuario'
       
-      // Intentar obtener el nombre completo
-      if (this.currentUser.full_name) {
-        return this.currentUser.full_name
+      console.log('👤 Current user:', this.currentUser)
+      
+      // Si tiene first_name, usar solo eso
+      if (this.currentUser.first_name) {
+        return this.currentUser.first_name
       }
       
-      // Si no, usar first_name + last_name
-      if (this.currentUser.first_name) {
-        const lastName = this.currentUser.last_name || ''
-        return `${this.currentUser.first_name} ${lastName}`.trim()
+      // Si tiene full_name, tomar solo la primera palabra
+      if (this.currentUser.full_name) {
+        return this.currentUser.full_name.split(' ')[0]
+      }
+      
+      // Si tiene nombres, tomar solo el primer nombre
+      if (this.currentUser.nombres) {
+        return this.currentUser.nombres.split(' ')[0]
       }
       
       // Como último recurso, usar username
@@ -510,10 +491,24 @@ export default {
     async loadUserCourses() {
       this.loadingCourses = true
       try {
+        console.log('🔄 Cargando cursos...')
         const response = await api.getCourses()
-        this.userCourses = response.data.results || response.data.data || response.data || []
+        console.log('📚 Respuesta cursos:', response.data)
+        
+        // Manejar diferentes formatos de respuesta
+        if (response.data.results) {
+          this.userCourses = response.data.results
+        } else if (Array.isArray(response.data)) {
+          this.userCourses = response.data
+        } else if (response.data.data) {
+          this.userCourses = response.data.data
+        } else {
+          this.userCourses = []
+        }
+        
+        console.log('✅ Cursos cargados:', this.userCourses)
       } catch (error) {
-        console.error('Error cargando cursos:', error)
+        console.error('❌ Error cargando cursos:', error)
         this.userCourses = []
       } finally {
         this.loadingCourses = false
@@ -522,10 +517,23 @@ export default {
     
     async loadUserChats() {
       try {
+        console.log('🔄 Cargando chats...')
         const response = await api.getChats()
-        this.userChats = response.data.results || response.data.data || response.data || []
+        console.log('💬 Respuesta chats:', response.data)
+        
+        if (response.data.results) {
+          this.userChats = response.data.results
+        } else if (Array.isArray(response.data)) {
+          this.userChats = response.data
+        } else if (response.data.data) {
+          this.userChats = response.data.data
+        } else {
+          this.userChats = []
+        }
+        
+        console.log('✅ Chats cargados:', this.userChats)
       } catch (error) {
-        console.error('Error cargando chats:', error)
+        console.error('❌ Error cargando chats:', error)
         this.userChats = []
       }
     },
@@ -533,10 +541,23 @@ export default {
     async loadUserPayments() {
       this.loadingPayments = true
       try {
+        console.log('🔄 Cargando pagos...')
         const response = await api.getPayments()
-        this.userPayments = response.data.results || response.data.data || response.data || []
+        console.log('💰 Respuesta pagos:', response.data)
+        
+        if (response.data.results) {
+          this.userPayments = response.data.results
+        } else if (Array.isArray(response.data)) {
+          this.userPayments = response.data
+        } else if (response.data.data) {
+          this.userPayments = response.data.data
+        } else {
+          this.userPayments = []
+        }
+        
+        console.log('✅ Pagos cargados:', this.userPayments)
       } catch (error) {
-        console.error('Error cargando pagos:', error)
+        console.error('❌ Error cargando pagos:', error)
         this.userPayments = []
       } finally {
         this.loadingPayments = false
@@ -546,10 +567,23 @@ export default {
     async loadUserDocuments() {
       this.loadingDocuments = true
       try {
+        console.log('🔄 Cargando documentos...')
         const response = await api.getDocuments()
-        this.userDocuments = response.data.results || response.data.data || response.data || []
+        console.log('📄 Respuesta documentos:', response.data)
+        
+        if (response.data.results) {
+          this.userDocuments = response.data.results
+        } else if (Array.isArray(response.data)) {
+          this.userDocuments = response.data
+        } else if (response.data.data) {
+          this.userDocuments = response.data.data
+        } else {
+          this.userDocuments = []
+        }
+        
+        console.log('✅ Documentos cargados:', this.userDocuments)
       } catch (error) {
-        console.error('Error cargando documentos:', error)
+        console.error('❌ Error cargando documentos:', error)
         this.userDocuments = []
       } finally {
         this.loadingDocuments = false
@@ -564,13 +598,15 @@ export default {
     
     async sendMessage() {
       try {
+        console.log('📤 Enviando mensaje:', this.chatForm)
         await api.createChat(this.chatForm)
+        console.log('✅ Mensaje enviado')
         await this.loadUserChats()
         this.resetChatForm()
-        this.$toast?.success?.('Mensaje enviado correctamente') // Si tienes un sistema de toast
+        alert('Mensaje enviado correctamente')
       } catch (error) {
-        console.error('Error enviando mensaje:', error)
-        alert('Error al enviar mensaje')
+        console.error('❌ Error enviando mensaje:', error)
+        alert('Error al enviar mensaje: ' + (error.response?.data?.message || error.message))
       }
     },
     
@@ -585,10 +621,10 @@ export default {
         await api.createDocument(formData)
         await this.loadUserDocuments()
         this.resetDocumentForm()
-        this.$toast?.success?.('Documento subido correctamente')
+        alert('Documento subido correctamente')
       } catch (error) {
         console.error('Error subiendo documento:', error)
-        alert('Error al subir documento')
+        alert('Error al subir documento: ' + (error.response?.data?.message || error.message))
       }
     },
     
@@ -656,7 +692,47 @@ export default {
 </script>
 
 <style scoped>
-/* ... estilos existentes ... */
+.user-dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+  min-width: 200px;
+  margin-top: 0.5rem;
+  border: 1px solid #e9ecef;
+  z-index: 1050; /* ✅ Z-index alto para que aparezca encima */
+}
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: #495057;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+
+.dropdown-item:hover {
+  background: #f8f9fa;
+  color: #dc3545;
+  text-decoration: none;
+}
+.dropdown-divider {
+  margin: 0.5rem 0;
+  border-color: #e9ecef;
+}
+
 .dashboard-view {
   min-height: 100vh;
   background: #f8f9fa;
