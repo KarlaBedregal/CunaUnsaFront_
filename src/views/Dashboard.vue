@@ -898,20 +898,6 @@ export default {
       this.$router.push(`/courses`)
     },
     
-    async sendMessage() {
-      try {
-        console.log('📤 Enviando mensaje:', this.chatForm)
-        await api.createChat(this.chatForm)
-        console.log('✅ Mensaje enviado')
-        await this.loadUserChats()
-        this.resetChatForm()
-        alert('Mensaje enviado correctamente')
-      } catch (error) {
-        console.error('❌ Error enviando mensaje:', error)
-        alert('Error al enviar mensaje: ' + (error.response?.data?.message || error.message))
-      }
-    },
-    
     async uploadDocument() {
       try {
         const formData = new FormData()
@@ -929,16 +915,8 @@ export default {
         alert('Error al subir documento: ' + (error.response?.data?.message || error.message))
       }
     },
-    
+
     // Métodos auxiliares
-    resetChatForm() {
-      this.chatForm = { workload: '', message: '' }
-    },
-    
-    resetDocumentForm() {
-      this.documentForm = { title: '', description: '', workload: '', file: null }
-    },
-    
     handleFileUpload(event) {
       this.documentForm.file = event.target.files[0]
     },
