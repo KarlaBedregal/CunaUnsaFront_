@@ -31,7 +31,6 @@ const routes = [
   // Puedes dejar las rutas de usuario si las usas
   { path: '/calendar', name: 'CalendarView', component: () => import('@/views/user/CalendarView.vue'), meta: { requiresAuth: true } },
   { path: '/files', name: 'PrivateFilesView', component: () => import('@/views/user/PrivateFilesView.vue'), meta: { requiresAuth: true } },
-  { path: '/reports', name: 'ReportsView', component: () => import('@/views/user/ReportsView.vue'), meta: { requiresAuth: true } },
   { path: '/preferences', name: 'PreferencesView', component: () => import('@/views/user/PreferencesView.vue'), meta: { requiresAuth: true } },
 ]
 
