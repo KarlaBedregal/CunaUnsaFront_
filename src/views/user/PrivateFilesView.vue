@@ -1,6 +1,6 @@
 <template>
   <div class="view-container">
-    <h1>📁 Archivos privados</h1>
+    <h1>📁 Mis Archivos</h1>
     <p>Aquí puedes subir y gestionar tus documentos personales.</p>
   </div>
 </template>
